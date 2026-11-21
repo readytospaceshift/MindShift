@@ -294,4 +294,1616 @@
     }
 
     .battery-btn.active {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(236, 72, 153, 0.1
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(236, 72, 153, 0.16));
+      border-color: #9333ea;
+      box-shadow: 0 4px 14px rgba(147, 51, 234, 0.18);
+    }
+
+    .battery-level {
+      font-weight: 800;
+      font-size: 0.96rem;
+    }
+
+    .battery-desc {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .battery-advice {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #6d28d9;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(168, 85, 247, 0.45);
+    }
+
+    /* 2. Brain Dump */
+    .dump-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .dump-input-row input {
+      flex: 1;
+    }
+
+    .task-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(216, 180, 254, 0.6);
+      border-radius: var(--radius-sm);
+      padding: 9px 12px;
+    }
+
+    .task-text {
+      flex: 1;
+      min-width: 180px;
+      font-size: 0.94rem;
+      font-weight: 500;
+    }
+
+    .task-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .mini-btn {
+      padding: 5px 9px;
+      font-size: 0.78rem;
+      border-radius: 8px;
+    }
+
+    /* Two-column middle row */
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    /* 3. Rule of One */
+    .north-star-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(236, 72, 153, 0.12), rgba(6, 182, 212, 0.12));
+      border: 2px solid rgba(168, 85, 247, 0.5);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .north-star-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: #7e22ce;
+      margin-bottom: 6px;
+    }
+
+    .north-star-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #2e1065;
+      margin-bottom: 12px;
+      word-break: break-word;
+    }
+
+    .timer-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(216, 180, 254, 0.6);
+    }
+
+    .timer-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .timer-display {
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: #6d28d9;
+      min-width: 64px;
+      text-align: center;
+    }
+
+    /* 4. 5-Min Wins */
+    .quick-win-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(167, 243, 208, 0.9);
+      border-radius: var(--radius-sm);
+      padding: 8px 11px;
+    }
+
+    /* 5. Self Care Chips */
+    .care-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .care-chip {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(216, 180, 254, 0.65);
+      color: #4c1d95;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .care-chip.done {
+      background: linear-gradient(135deg, #d1fae5, #cffafe);
+      border-color: #10b981;
+      color: #065f46;
+      text-decoration: line-through;
+    }
+
+    /* 6. Gentle Unsticking Prompt */
+    .prompt-box {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(192, 132, 252, 0.6);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #3b0764;
+      margin-bottom: 10px;
+    }
+
+    .prompt-reply {
+      width: 100%;
+      min-height: 64px;
+      resize: vertical;
+    }
+
+    /* 7. Later, Not Never (Parked Items with Reorder) */
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--iridescent-grad);
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* 8. Today's Wins */
+    .wins-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .win-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(236, 253, 245, 0.95), rgba(240, 249, 255, 0.95));
+      border: 1px solid rgba(110, 231, 183, 0.75);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #065f46;
+    }
+
+    .win-time {
+      font-size: 0.76rem;
+      color: #047857;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* BONUS: Small-Win Prize Wheel */
+    .wheel-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .wheel-controls label {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #4c1d95;
+    }
+
+    .wheel-layout {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .wheel-stage {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 28px solid #db2777;
+      filter: drop-shadow(0 3px 6px rgba(219, 39, 119, 0.45));
+      z-index: 6;
+      transition: transform 0.08s ease;
+    }
+
+    .wheel-pointer.tick {
+      transform: translateX(-50%) rotate(-14deg);
+    }
+
+    .wheel-disc {
+      width: 332px;
+      height: 332px;
+      border-radius: 50%;
+      box-shadow: 0 12px 30px rgba(139, 92, 246, 0.25), 0 0 0 6px rgba(255, 255, 255, 0.92), 0 0 0 9px rgba(192, 132, 252, 0.45);
+      transition: transform 4.2s cubic-bezier(0.15, 0.88, 0.22, 1);
+      will-change: transform;
+    }
+
+    .wheel-disc svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+    }
+
+    .wheel-hub-btn {
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: var(--iridescent-grad);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      border: 4px solid #ffffff;
+      box-shadow: 0 6px 18px rgba(139, 92, 246, 0.42);
+      z-index: 5;
+      cursor: pointer;
+    }
+
+    .wheel-hub-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .wheel-hub-btn:disabled {
+      opacity: 0.78;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .wheel-result-panel {
+      flex: 1;
+      min-width: 260px;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(192, 132, 252, 0.65);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.1);
+    }
+
+    .wheel-badge {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--soft-opal-grad);
+      color: #6d28d9;
+      margin-bottom: 8px;
+    }
+
+    .wheel-task-text {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #2e1065;
+      margin-bottom: 14px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wheel-result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* Confetti burst */
+    .confetti-piece {
+      position: fixed;
+      width: 9px;
+      height: 9px;
+      border-radius: 3px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confettiFall 1.1s ease-out forwards;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) rotate(540deg) scale(0.4); opacity: 0; }
+    }
+
+    .empty-note {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    @media (max-width: 640px) {
+      h1.app-title {
+        white-space: normal;
+        flex-wrap: wrap;
+      }
+      .wheel-stage {
+        width: 300px;
+        height: 300px;
+      }
+      .wheel-disc {
+        width: 292px;
+        height: 292px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating background stars -->
+  <div class="sparkles-layer" aria-hidden="true">
+    <span class="twinkle" style="top: 8%; left: 12%;">✦</span>
+    <span class="twinkle">✧</span>
+    <span class="twinkle">⋆</span>
+    <span class="twinkle">✦</span>
+    <span class="twinkle">✧</span>
+    <span class="twinkle">⋆</span>
+  </div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="title-row">
+        <h1 class="app-title">
+          <span class="title-main">✨ Mind Shift</span><span class="title-sub">: Guided ADHD Brain Dump &amp; Daily Task Organization Tool</span>
+        </h1>
+      </div>
+
+      <div class="header-subrow">
+        <p class="subtitle">Externalize the mental noise. Pick one thing. Be kind to your brain.</p>
+
+        <div class="header-controls">
+          <div class="sound-picker-group">
+            <label for="fanfareSelect" class="sound-label">🎺 Task-done fanfare:</label>
+            <select id="fanfareSelect" aria-label="Celebration sound for checking off tasks">
+              <option value="derby">🐎 Derby Charge</option>
+              <option value="royal">👑 Royal Brass</option>
+              <option value="victory">🏆 Victory Pop</option>
+              <option value="jazz">🎷 Jazz Riff</option>
+              <option value="star">🌟 Star Fanfare</option>
+            </select>
+          </div>
+          <button id="muteToggleBtn" class="btn-soft" type="button">🔊 Sound On</button>
+          <button id="freshDayBtn" class="btn-danger-soft" type="button">Fresh Day Reset</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. MENTAL BATTERY CHECK-IN -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🔋 1. Mental Battery Check-In</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Tap how your brain feels right now. Matching your task size to your actual fuel stops procrastination before it starts.
+      </div>
+      <div class="battery-grid" id="batteryGrid">
+        <button type="button" class="battery-btn" data-level="low">
+          <span class="battery-level">🪫 Low Battery (15–30%)</span>
+          <span class="battery-desc">Foggy, tired, or overstimulated. Micro-steps &amp; rest only.</span>
+        </button>
+        <button type="button" class="battery-btn" data-level="steady">
+          <span class="battery-level">🔋 Steady Energy (50–70%)</span>
+          <span class="battery-desc">Functional. One main focus + a couple quick wins.</span>
+        </button>
+        <button type="button" class="battery-btn" data-level="hyperfocus">
+          <span class="battery-level">⚡ Spark / Hyperfocus (85%+)</span>
+          <span class="battery-desc">High momentum! Ride the wave—just remember water &amp; breaks.</span>
+        </button>
+      </div>
+      <div class="battery-advice" id="batteryAdvice">
+        Pick your current energy level above for a gentle pacing nudge.
+      </div>
+    </section>
+
+    <!-- 2. BRAIN DUMP -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🧠 2. Brain Dump ("Mental Tab Close")</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Type every floating thought, chore, or worry out of your head without organizing yet—then sort each item into <em>Focus</em>, <em>5-Min Win</em>, or <em>Park</em>.
+      </div>
+      <form class="dump-input-row" id="dumpForm">
+        <input type="text" id="dumpInput" placeholder="Get it out of your head (e.g., reply to email, drink water, find keys)..." autocomplete="off" />
+        <button type="submit" class="btn-primary">+ Dump</button>
+      </form>
+      <ul class="task-list" id="dumpList"></ul>
+    </section>
+
+    <!-- 3 & 4. RULE OF ONE + 5-MIN DOPAMINE WINS -->
+    <div class="two-col">
+      <!-- 3. RULE OF ONE -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">🎯 3. The Rule of One (North Star)</h2>
+        </div>
+        <div class="helper-guide">
+          <strong>What to do here:</strong> Keep <em>only one</em> main task here at a time so your brain isn't paralyzed by ten competing priorities.
+        </div>
+        <div class="north-star-box">
+          <div class="north-star-label">Current Single Focus</div>
+          <div class="north-star-text" id="northStarText">No focus task chosen yet — pick one from your Brain Dump!</div>
+          <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;" id="northStarActions"></div>
+        </div>
+        <div class="timer-bar">
+          <div class="timer-presets">
+            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="2">2m (Micro-Step)</button>
+            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="5">5m</button>
+            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="10">10m</button>
+            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="20">20m</button>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="timer-display" id="timerDisplay">02:00</span>
+            <button type="button" class="btn-primary mini-btn" id="timerStartBtn">▶ Start</button>
+            <button type="button" class="btn-soft mini-btn" id="timerResetBtn">↺</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 5-MIN DOPAMINE WINS -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">⚡ 4. 5-Min Dopamine Wins</h2>
+        </div>
+        <div class="helper-guide">
+          <strong>What to do here:</strong> Keep 2–3 tiny, fast tasks here to build momentum before tackling anything heavier.
+        </div>
+        <form class="dump-input-row" id="quickWinForm">
+          <input type="text" id="quickWinInput" placeholder="Add a 5-min quick task..." autocomplete="off" />
+          <button type="submit" class="btn-soft">+ Add</button>
+        </form>
+        <ul class="task-list" id="quickWinList"></ul>
+      </section>
+    </div>
+
+    <!-- 5. BODY & SENSORY CHECK -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🌿 5. Body &amp; Sensory Check (Basic Needs)</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Executive dysfunction is often thirst, hunger, or sensory overload in disguise. Tap any chip you've done for an instant sparkle boost!
+      </div>
+      <div class="care-grid" id="careGrid"></div>
+    </section>
+
+    <!-- 6. GENTLE UNSTICKING PROMPT -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">✨ 6. Gentle Unsticking Prompt</h2>
+        <button type="button" class="btn-soft mini-btn" id="shufflePromptBtn">Shuffle Prompt ↻</button>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Feeling frozen? Read the prompt below and jot down one messy sentence to break through wall-of-awful friction.
+      </div>
+      <div class="prompt-box" id="promptText"></div>
+      <textarea class="prompt-reply" id="promptReply" placeholder="Jot a quick, zero-pressure answer here..."></textarea>
+    </section>
+
+    <!-- 7. LATER, NOT NEVER (PARKED & PRIORITIZED) -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🅿️ 7. Later, Not Never (Parked Ideas)</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Safely park non-urgent ideas here so you don't lose them. Use <strong>↑ / ↓</strong> to rank what matters most next, or click <strong>🎯 Focus</strong> when ready.
+      </div>
+      <ul class="task-list" id="parkedList"></ul>
+    </section>
+
+    <!-- 8. REVERSE TO-DO LIST (TODAY'S WINS) -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🏆 8. Reverse To-Do List (Today's Wins)</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Every task, self-care chip, and wheel spin you complete automatically lands here so you can actually see how much you accomplished today.
+      </div>
+      <form class="dump-input-row" id="manualWinForm">
+        <input type="text" id="manualWinInput" placeholder="Log something you already did (even brushing teeth counts!)..." autocomplete="off" />
+        <button type="submit" class="btn-mint">+ Log Win</button>
+      </form>
+      <ul class="wins-list" id="winsList"></ul>
+    </section>
+
+    <!-- BONUS: SMALL-WIN PRIZE WHEEL -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🎡 Bonus: Small-Win Prize Wheel!</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Want an easy dopamine win without deciding what to do? Pick a category and tap <strong>SPIN!</strong> in the center of the wheel—then click <strong>✅ Did It!</strong> to log it straight into Today's Wins.
+      </div>
+
+      <div class="wheel-controls">
+        <label for="wheelCategorySelect">Pick a category:</label>
+        <select id="wheelCategorySelect"></select>
+      </div>
+
+      <div class="wheel-layout">
+        <div class="wheel-stage">
+          <div class="wheel-pointer" id="wheelPointer"></div>
+          <div class="wheel-disc" id="wheelDisc">
+            <svg id="wheelSvg" viewBox="0 0 340 340" aria-label="Small-Win Prize Wheel"></svg>
+          </div>
+          <button type="button" class="wheel-hub-btn" id="spinWheelBtn">SPIN!</button>
+        </div>
+
+        <div class="wheel-result-panel">
+          <div class="wheel-badge" id="wheelResultBadge">Ready to Spin</div>
+          <div class="wheel-task-text" id="wheelResultText">Tap SPIN! in the center of the wheel for a quick win!</div>
+          <div class="wheel-result-actions">
+            <button type="button" class="btn-mint" id="wheelCompleteBtn" disabled>✅ Did It! (+ Win)</button>
+            <button type="button" class="btn-soft" id="wheelRespinBtn">🎲 Spin Again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ---------- STATE & STORAGE MIGRATION ----------
+    const STORAGE_KEY = "mindshift_adhd_state_v1";
+    const LEGACY_KEYS = ["meloflow_adhd_state_v1", "adhd_brain_dump_state_v1"];
+
+    const DEFAULT_STATE = {
+      battery: "",
+      dump: [],
+      northStar: "",
+      quickWins: [],
+      careDone: [],
+      promptIndex: 0,
+      promptReply: "",
+      parked: [],
+      wins: [],
+      fanfare: "derby",
+      muted: false,
+      wheelCategory: "bedroom"
+    };
+
+    function loadState() {
+      try {
+        let raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          for (const oldKey of LEGACY_KEYS) {
+            const legacy = localStorage.getItem(oldKey);
+            if (legacy) {
+              raw = legacy;
+              localStorage.setItem(STORAGE_KEY, legacy);
+              break;
+            }
+          }
+        }
+        return raw ? { ...DEFAULT_STATE, ...JSON.parse(raw) } : { ...DEFAULT_STATE };
+      } catch (e) {
+        return { ...DEFAULT_STATE };
+      }
+    }
+
+    let state = loadState();
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    // ---------- WEB AUDIO ENGINE ----------
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    const TRUMPET_STYLES = {
+      derby: [
+        { freq: 392.00, time: 0.00, dur: 0.11 },
+        { freq: 523.25, time: 0.12, dur: 0.11 },
+        { freq: 659.25, time: 0.24, dur: 0.11 },
+        { freq: 783.99, time: 0.36, dur: 0.22 },
+        { freq: 659.25, time: 0.60, dur: 0.11 },
+        { freq: 783.99, time: 0.73, dur: 0.38 }
+      ],
+      royal: [
+        { freq: 523.25, time: 0.00, dur: 0.14 },
+        { freq: 523.25, time: 0.16, dur: 0.10 },
+        { freq: 523.25, time: 0.28, dur: 0.10 },
+        { freq: 659.25, time: 0.40, dur: 0.24 },
+        { freq: 783.99, time: 0.66, dur: 0.42 }
+      ],
+      victory: [
+        { freq: 440.00, time: 0.00, dur: 0.10 },
+        { freq: 554.37, time: 0.11, dur: 0.10 },
+        { freq: 659.25, time: 0.22, dur: 0.10 },
+        { freq: 880.00, time: 0.34, dur: 0.42 }
+      ],
+      jazz: [
+        { freq: 392.00, time: 0.00, dur: 0.12 },
+        { freq: 466.16, time: 0.14, dur: 0.12 },
+        { freq: 587.33, time: 0.28, dur: 0.14 },
+        { freq: 698.46, time: 0.44, dur: 0.14 },
+        { freq: 783.99, time: 0.60, dur: 0.40 }
+      ],
+      star: [
+        { freq: 587.33, time: 0.00, dur: 0.11 },
+        { freq: 739.99, time: 0.12, dur: 0.11 },
+        { freq: 880.00, time: 0.24, dur: 0.14 },
+        { freq: 1174.66, time: 0.40, dur: 0.44 }
+      ]
+    };
+
+    function playTrumpetFanfare() {
+      if (state.muted) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const notes = TRUMPET_STYLES[state.fanfare] || TRUMPET_STYLES.derby;
+      const now = ctx.currentTime;
+
+      notes.forEach(note => {
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+
+        osc1.type = "sawtooth";
+        osc2.type = "triangle";
+        osc1.frequency.setValueAtTime(note.freq, now + note.time);
+        osc2.frequency.setValueAtTime(note.freq * 1.003, now + note.time);
+
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(900, now + note.time);
+        filter.frequency.exponentialRampToValueAtTime(2600, now + note.time + 0.05);
+        filter.frequency.exponentialRampToValueAtTime(1400, now + note.time + note.dur);
+
+        gain.gain.setValueAtTime(0.001, now + note.time);
+        gain.gain.linearRampToValueAtTime(0.14, now + note.time + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + note.time + note.dur);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc1.start(now + note.time);
+        osc2.start(now + note.time);
+        osc1.stop(now + note.time + note.dur + 0.02);
+        osc2.stop(now + note.time + note.dur + 0.02);
+      });
+    }
+
+    function playSparkleChime() {
+      if (state.muted) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const freqs = [783.99, 1046.50, 1318.51, 1567.98];
+      const now = ctx.currentTime;
+
+      freqs.forEach((f, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(f, now + idx * 0.065);
+        gain.gain.setValueAtTime(0.001, now + idx * 0.065);
+        gain.gain.linearRampToValueAtTime(0.12, now + idx * 0.065 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.065 + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.065);
+        osc.stop(now + idx * 0.065 + 0.38);
+      });
+    }
+
+    function playWheelTick() {
+      if (state.muted) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(920, now);
+      osc.frequency.exponentialRampToValueAtTime(420, now + 0.035);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.045);
+    }
+
+    function spawnConfettiBurst(originEl) {
+      const colors = ["#8b5cf6", "#ec4899", "#06b6d4", "#10b981", "#f59e0b", "#c084fc"];
+      const rect = originEl ? originEl.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 24; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti-piece";
+        piece.style.left = cx + "px";
+        piece.style.top = cy + "px";
+        piece.style.background = colors[i % colors.length];
+        const angle = (Math.PI * 2 * i) / 24 + (Math.random() - 0.5) * 0.4;
+        const dist = 60 + Math.random() * 90;
+        piece.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+        piece.style.setProperty("--dy", Math.sin(angle) * dist - 20 + "px");
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 1150);
+      }
+    }
+
+    // ---------- WIN LOGGER ----------
+    function addWin(text, type = "task", triggerEl = null) {
+      const nowStr = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      state.wins.unshift({ text, time: nowStr, type });
+      saveState();
+      renderWins();
+      if (type === "task") {
+        playTrumpetFanfare();
+      } else {
+        playSparkleChime();
+      }
+      spawnConfettiBurst(triggerEl);
+    }
+
+    // ---------- 1. BATTERY CHECK-IN ----------
+    const BATTERY_MESSAGES = {
+      low: "🪫 Low Battery Mode: Shrink your goal to one 2-minute micro-step, hydrate, and drop non-essentials guilt-free.",
+      steady: "🔋 Steady Mode: Pick ONE North Star task, knock out 1–2 quick wins first for dopamine, and pace yourself.",
+      hyperfocus: "⚡ Spark Mode: Ride the wave on your North Star task! Set a 20m timer so you remember to stretch and drink water."
+    };
+
+    function renderBattery() {
+      document.querySelectorAll(".battery-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.level === state.battery);
+      });
+      const adviceEl = document.getElementById("batteryAdvice");
+      adviceEl.textContent = BATTERY_MESSAGES[state.battery] || "Pick your current energy level above for a gentle pacing nudge.";
+    }
+
+    document.getElementById("batteryGrid").addEventListener("click", e => {
+      const btn = e.target.closest(".battery-btn");
+      if (!btn) return;
+      state.battery = btn.dataset.level;
+      saveState();
+      renderBattery();
+    });
+
+    // ---------- 2. BRAIN DUMP ----------
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    }
+
+    function renderDump() {
+      const list = document.getElementById("dumpList");
+      if (!state.dump.length) {
+        list.innerHTML = `<li class="empty-note">Your mind dump tray is clear. Add any floating thoughts above!</li>`;
+        return;
+      }
+      list.innerHTML = state.dump.map((item, idx) => `
+        <li class="task-item">
+          <span class="task-text">${escapeHtml(item)}</span>
+          <div class="task-actions">
+            <button type="button" class="btn-primary mini-btn" data-action="focus" data-idx="${idx}">🎯 Focus</button>
+            <button type="button" class="btn-soft mini-btn" data-action="quick" data-idx="${idx}">⚡ 5-Min</button>
+            <button type="button" class="btn-soft mini-btn" data-action="park" data-idx="${idx}">🅿️ Park</button>
+            <button type="button" class="btn-mint mini-btn" data-action="done" data-idx="${idx}">✓</button>
+            <button type="button" class="btn-danger-soft mini-btn" data-action="del" data-idx="${idx}">✕</button>
+          </div>
+        </li>
+      `).join("");
+    }
+
+    document.getElementById("dumpForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("dumpInput");
+      const val = input.value.trim();
+      if (!val) return;
+      state.dump.unshift(val);
+      input.value = "";
+      saveState();
+      renderDump();
+    });
+
+    document.getElementById("dumpList").addEventListener("click", e => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const idx = Number(btn.dataset.idx);
+      const item = state.dump[idx];
+      if (item === undefined) return;
+      const action = btn.dataset.action;
+
+      if (action === "focus") {
+        if (state.northStar) state.dump.push(state.northStar);
+        state.northStar = item;
+        state.dump.splice(idx, 1);
+      } else if (action === "quick") {
+        state.quickWins.push(item);
+        state.dump.splice(idx, 1);
+      } else if (action === "park") {
+        state.parked.push(item);
+        state.dump.splice(idx, 1);
+      } else if (action === "done") {
+        state.dump.splice(idx, 1);
+        addWin(item, "task", btn);
+      } else if (action === "del") {
+        state.dump.splice(idx, 1);
+      }
+      saveState();
+      renderAll();
+    });
+
+    // ---------- 3. RULE OF ONE + TIMER ----------
+    function renderNorthStar() {
+      const textEl = document.getElementById("northStarText");
+      const actionsEl = document.getElementById("northStarActions");
+      if (!state.northStar) {
+        textEl.textContent = "No focus task chosen yet — pick one from your Brain Dump!";
+        actionsEl.innerHTML = "";
+        return;
+      }
+      textEl.textContent = state.northStar;
+      actionsEl.innerHTML = `
+        <button type="button" class="btn-mint" id="completeNorthStarBtn">🎉 Complete Focus Task!</button>
+        <button type="button" class="btn-soft" id="parkNorthStarBtn">🅿️ Park for Later</button>
+      `;
+    }
+
+    document.getElementById("northStarActions").addEventListener("click", e => {
+      if (e.target.id === "completeNorthStarBtn") {
+        const finished = state.northStar;
+        state.northStar = "";
+        saveState();
+        renderNorthStar();
+        addWin(finished, "task", e.target);
+      } else if (e.target.id === "parkNorthStarBtn") {
+        state.parked.unshift(state.northStar);
+        state.northStar = "";
+        saveState();
+        renderAll();
+      }
+    });
+
+    let timerSeconds = 120;
+    let timerDefaultSeconds = 120;
+    let timerInterval = null;
+
+    function updateTimerDisplay() {
+      const m = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
+      const s = String(timerSeconds % 60).padStart(2, "0");
+      document.getElementById("timerDisplay").textContent = `${m}:${s}`;
+    }
+
+    document.querySelectorAll(".timer-preset").forEach(btn => {
+      btn.addEventListener("click", () => {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById("timerStartBtn").textContent = "▶ Start";
+        timerDefaultSeconds = Number(btn.dataset.mins) * 60;
+        timerSeconds = timerDefaultSeconds;
+        updateTimerDisplay();
+      });
+    });
+
+    document.getElementById("timerStartBtn").addEventListener("click", () => {
+      const startBtn = document.getElementById("timerStartBtn");
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        startBtn.textContent = "▶ Resume";
+        return;
+      }
+      getAudioCtx();
+      startBtn.textContent = "⏸ Pause";
+      timerInterval = setInterval(() => {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          startBtn.textContent = "▶ Start";
+          playSparkleChime();
+          spawnConfettiBurst(document.getElementById("timerDisplay"));
+        }
+      }, 1000);
+    });
+
+    document.getElementById("timerResetBtn").addEventListener("click", () => {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      document.getElementById("timerStartBtn").textContent = "▶ Start";
+      timerSeconds = timerDefaultSeconds;
+      updateTimerDisplay();
+    });
+
+    // ---------- 4. 5-MIN DOPAMINE WINS ----------
+    function renderQuickWins() {
+      const list = document.getElementById("quickWinList");
+      if (!state.quickWins.length) {
+        list.innerHTML = `<li class="empty-note">Add a 5-minute warm-up task above or send one from your Brain Dump.</li>`;
+        return;
+      }
+      list.innerHTML = state.quickWins.map((item, idx) => `
+        <li class="quick-win-item">
+          <span class="task-text">${escapeHtml(item)}</span>
+          <div class="task-actions">
+            <button type="button" class="btn-mint mini-btn" data-qaction="done" data-idx="${idx}">✓ Done</button>
+            <button type="button" class="btn-danger-soft mini-btn" data-qaction="del" data-idx="${idx}">✕</button>
+          </div>
+        </li>
+      `).join("");
+    }
+
+    document.getElementById("quickWinForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("quickWinInput");
+      const val = input.value.trim();
+      if (!val) return;
+      state.quickWins.push(val);
+      input.value = "";
+      saveState();
+      renderQuickWins();
+    });
+
+    document.getElementById("quickWinList").addEventListener("click", e => {
+      const btn = e.target.closest("button[data-qaction]");
+      if (!btn) return;
+      const idx = Number(btn.dataset.idx);
+      const item = state.quickWins[idx];
+      if (!item) return;
+      state.quickWins.splice(idx, 1);
+      saveState();
+      renderQuickWins();
+      if (btn.dataset.qaction === "done") {
+        addWin(item, "task", btn);
+      }
+    });
+
+    // ---------- 5. BODY & SENSORY CHECK ----------
+    const CARE_ITEMS = [
+      "💧 Drank Water",
+      "🍎 Ate Protein / Snack",
+      "💊 Took Meds / Vitamins",
+      "🧘 Stretched / Moved",
+      "🌬️ Deep Breaths",
+      "👀 Rested Eyes",
+      "🎧 Adjusted Sound / Light"
+    ];
+
+    function renderCare() {
+      const grid = document.getElementById("careGrid");
+      grid.innerHTML = CARE_ITEMS.map(label => {
+        const isDone = state.careDone.includes(label);
+        return `<button type="button" class="care-chip ${isDone ? "done" : ""}" data-care="${escapeHtml(label)}">${escapeHtml(label)}</button>`;
+      }).join("");
+    }
+
+    document.getElementById("careGrid").addEventListener("click", e => {
+      const chip = e.target.closest(".care-chip");
+      if (!chip) return;
+      const label = chip.dataset.care;
+      const existingIdx = state.careDone.indexOf(label);
+      if (existingIdx === -1) {
+        state.careDone.push(label);
+        saveState();
+        renderCare();
+        addWin(`Self-Care: ${label}`, "care", chip);
+      } else {
+        state.careDone.splice(existingIdx, 1);
+        saveState();
+        renderCare();
+      }
+    });
+
+    // ---------- 6. GENTLE UNSTICKING PROMPTS (15 PROMPTS) ----------
+    const PROMPTS = [
+      "What is the literal, ridiculously small first physical action for your main task? (e.g., 'Open the tab', not 'Do taxes')",
+      "Where is perfectionism stalling you today? What does a 'B-minus, done-is-better-than-perfect' version look like?",
+      "Look around your space: what is one 2-minute pile of clutter draining your background energy?",
+      "Why does your avoided task feel heavy right now—is it boring, unclear, or missing a tool? How can you make it 20% easier?",
+      "What is one tiny thing you can set out right now so Tomorrow-You has an easier start?",
+      "If you could only cross ONE thing off before resting guilt-free today, what would make you feel most relieved?",
+      "What are you currently overcomplicating that could be solved with a quick text, template, or messy rough draft?",
+      "Check your body for 10 seconds: are you hungry, dehydrated, cold, overstimulated, or needing a stretch before your brain can focus?",
+      "What is one 'should' or obligation on your mental list that you can officially drop, delegate, or postpone until next week?",
+      "How can you add a little dopamine to your main task right now—a favorite playlist, a warm drink, a timer race, or working near a friend?",
+      "If a close friend had your exact to-do list and energy level today, what kind advice would you give them?",
+      "What is the tiniest 60-second 'bridge task' (like clearing your desk surface or opening the right folder) that will help you transition into focus?",
+      "Are you stuck because you don't know the whole plan yet? What is just the VERY next step—ignoring steps 3 through 10?",
+      "What distraction is currently pulling at your attention, and where can you safely park it for the next 10 minutes?",
+      "Regardless of how much gets finished today, what is one thing you handled recently that deserves a little credit?"
+    ];
+
+    function renderPrompt() {
+      const idx = state.promptIndex % PROMPTS.length;
+      document.getElementById("promptText").textContent = PROMPTS[idx];
+      document.getElementById("promptReply").value = state.promptReply || "";
+    }
+
+    document.getElementById("shufflePromptBtn").addEventListener("click", () => {
+      state.promptIndex = (state.promptIndex + 1) % PROMPTS.length;
+      state.promptReply = "";
+      saveState();
+      renderPrompt();
+    });
+
+    document.getElementById("promptReply").addEventListener("input", e => {
+      state.promptReply = e.target.value;
+      saveState();
+    });
+
+    // ---------- 7. LATER, NOT NEVER (PARKED & REORDERABLE) ----------
+    function renderParked() {
+      const list = document.getElementById("parkedList");
+      if (!state.parked.length) {
+        list.innerHTML = `<li class="empty-note">Nothing parked yet. Send non-urgent ideas here from your Brain Dump!</li>`;
+        return;
+      }
+      list.innerHTML = state.parked.map((item, idx) => `
+        <li class="task-item">
+          <span class="rank-badge">#${idx + 1}</span>
+          <span class="task-text">${escapeHtml(item)}</span>
+          <div class="task-actions">
+            <button type="button" class="btn-soft mini-btn" data-paction="up" data-idx="${idx}" ${idx === 0 ? "disabled" : ""}>↑</button>
+            <button type="button" class="btn-soft mini-btn" data-paction="down" data-idx="${idx}" ${idx === state.parked.length - 1 ? "disabled" : ""}>↓</button>
+            <button type="button" class="btn-primary mini-btn" data-paction="focus" data-idx="${idx}">🎯 Focus</button>
+            <button type="button" class="btn-mint mini-btn" data-paction="done" data-idx="${idx}">✓</button>
+            <button type="button" class="btn-danger-soft mini-btn" data-paction="del" data-idx="${idx}">✕</button>
+          </div>
+        </li>
+      `).join("");
+    }
+
+    document.getElementById("parkedList").addEventListener("click", e => {
+      const btn = e.target.closest("button[data-paction]");
+      if (!btn) return;
+      const idx = Number(btn.dataset.idx);
+      const item = state.parked[idx];
+      if (!item) return;
+      const action = btn.dataset.paction;
+
+      if (action === "up" && idx > 0) {
+        [state.parked[idx - 1], state.parked[idx]] = [state.parked[idx], state.parked[idx - 1]];
+      } else if (action === "down" && idx < state.parked.length - 1) {
+        [state.parked[idx + 1], state.parked[idx]] = [state.parked[idx], state.parked[idx + 1]];
+      } else if (action === "focus") {
+        if (state.northStar) state.parked.push(state.northStar);
+        state.northStar = item;
+        state.parked.splice(idx, 1);
+      } else if (action === "done") {
+        state.parked.splice(idx, 1);
+        addWin(item, "task", btn);
+      } else if (action === "del") {
+        state.parked.splice(idx, 1);
+      }
+      saveState();
+      renderAll();
+    });
+
+    // ---------- 8. TODAY'S WINS ----------
+    function renderWins() {
+      const list = document.getElementById("winsList");
+      if (!state.wins.length) {
+        list.innerHTML = `<li class="empty-note">Your completed tasks, self-care chips, and prize wheel wins will appear here!</li>`;
+        return;
+      }
+      list.innerHTML = state.wins.map(w => `
+        <li class="win-item">
+          <span>✨ ${escapeHtml(w.text)}</span>
+          <span class="win-time">${escapeHtml(w.time)}</span>
+        </li>
+      `).join("");
+    }
+
+    document.getElementById("manualWinForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("manualWinInput");
+      const val = input.value.trim();
+      if (!val) return;
+      input.value = "";
+      addWin(val, "task", e.submitter || input);
+    });
+
+    // ---------- BONUS: SMALL-WIN PRIZE WHEEL (15 CATEGORIES, 120 TASKS) ----------
+    const SMALL_WIN_CATEGORIES = {
+      bedroom: {
+        label: "🛏️ Bedroom",
+        tasks: [
+          "Put away or hang up 5 pieces of clothing",
+          "Clear off one nightstand or dresser surface",
+          "Gather dirty laundry into the hamper",
+          "Make your bed (or pull the comforter up neatly)",
+          "Vacuum or sweep the main floor path",
+          "Organize one single drawer",
+          "Toss any trash, cups, or wrappers onto a tray",
+          "Change or fluff your pillowcases"
+        ]
+      },
+      bathroom: {
+        label: "🚿 Bathroom",
+        tasks: [
+          "Wipe down the sink and faucet",
+          "Clear off the bathroom counter",
+          "Swap out a used towel for a fresh one",
+          "Empty the bathroom trash can",
+          "Swish the toilet bowl with a brush",
+          "Restock toilet paper or hand soap",
+          "Toss 3 expired or empty bottles",
+          "Wipe down the bathroom mirror"
+        ]
+      },
+      livingroom: {
+        label: "🛋️ Living Room",
+        tasks: [
+          "Fluff and straighten couch pillows and throw blanket",
+          "Clear all cups, mugs, and dishes to the sink",
+          "Clear off the coffee table",
+          "Gather stray items into a 'put away later' basket",
+          "Vacuum or sweep the center rug/floor",
+          "Coil or tuck away loose charging cords",
+          "Water one houseplant",
+          "Toss junk mail, flyers, or loose paper scraps"
+        ]
+      },
+      outside: {
+        label: "🌳 Outside / Yard",
+        tasks: [
+          "Step outside for 3 minutes of fresh air and sunlight",
+          "Bring in the mail or packages from the porch",
+          "Pick up 5 pieces of litter, sticks, or stray yard items",
+          "Sweep off the front steps or porch mat",
+          "Water outdoor plants or garden beds",
+          "Roll the trash or recycling bin back from the curb",
+          "Wipe down outdoor patio chairs or table",
+          "Check and top off outdoor pet water or bird feeder"
+        ]
+      },
+      computer: {
+        label: "💻 Computer & Digital",
+        tasks: [
+          "Close 10 open browser tabs you don't need right now",
+          "Delete or archive 10 old emails from your inbox",
+          "Clear off your desktop into one 'To Sort' folder",
+          "Empty your computer's Trash / Recycle Bin",
+          "Unsubscribe from 2 annoying promotional email lists",
+          "Restart your computer or install pending updates",
+          "Organize one folder in your Downloads",
+          "Back up or save an important file"
+        ]
+      },
+      kids: {
+        label: "🧸 Kids / Family",
+        tasks: [
+          "Do a 3-minute 'toy rescue' into one bin or basket",
+          "Check and restock the backpack, diaper bag, or car kit",
+          "Clear out old papers or artwork from school folders",
+          "Wipe down sticky hands, faces, or table surfaces",
+          "Prep tomorrow's outfits or shoes by the door",
+          "Refill kids' water bottles for the day",
+          "Read one short picture book or do a 5-min play check-in",
+          "Toss broken crayons, dried markers, or tiny clutter"
+        ]
+      },
+      work: {
+        label: "💼 Work & Admin",
+        tasks: [
+          "Reply to one quick message or email you've delayed",
+          "Write down the top 3 priorities for your next work block",
+          "Clear off your physical desk workspace",
+          "Pay one bill or check your bank balance for 60 seconds",
+          "File, scan, or shred 3 loose pieces of paperwork",
+          "Schedule one appointment or reminder on your calendar",
+          "Spend 5 minutes organizing your work notes or list",
+          "Follow up with one client, coworker, or contact"
+        ]
+      },
+      basicneeds: {
+        label: "💧 Basic Needs (Body Fuel)",
+        tasks: [
+          "Drink a full glass of water right now",
+          "Eat a real snack with protein (nuts, hummus, toast, etc.)",
+          "Take any daily medications or vitamins",
+          "Brush your teeth or splash cool water on your face",
+          "Use the restroom (don't hold it while hyperfocusing!)",
+          "Open a window or adjust the thermostat for comfort",
+          "Wash your hands and put on cozy socks or comfy clothes",
+          "Have a warm cup of tea, matcha, or water with lemon"
+        ]
+      },
+      selfcare: {
+        label: "🌿 Self-Care & Reset",
+        tasks: [
+          "Do 60 seconds of shoulder rolls and neck stretches",
+          "Put on an upbeat song and dance or vibe for 3 minutes",
+          "Sit or lie down with eyes closed for 5 guilt-free minutes",
+          "Put on hand lotion, lip balm, or a refreshing face mist",
+          "Step away from all screens for 5 full minutes",
+          "Write down 3 things you appreciate about yourself today",
+          "Take 5 slow, deep belly breaths (4s in, 6s out)",
+          "Wash your face or take a quick warm rinse shower"
+        ]
+      },
+      kitchen: {
+        label: "🍽️ Kitchen",
+        tasks: [
+          "Load or unload just the top rack of the dishwasher",
+          "Wipe down the kitchen counters and stove top",
+          "Wash 5 dishes sitting in the sink",
+          "Clear off the kitchen table or island",
+          "Toss 3 expired items from the fridge",
+          "Take out the kitchen trash bag and add a fresh liner",
+          "Swap out the dish towel and sponge",
+          "Wipe down the microwave or coffee maker"
+        ]
+      },
+      car: {
+        label: "🚗 Car",
+        tasks: [
+          "Grab a bag and toss all car trash/wrappers inside",
+          "Bring inside any water bottles, mugs, or bags from the car",
+          "Wipe down the dashboard and steering wheel",
+          "Organize the glove compartment or center console",
+          "Shake out the front floor mats",
+          "Put a spare charger, tissues, or reusable bags in the trunk",
+          "Check your gas tank level so there are no surprises",
+          "Clear off the passenger seat"
+        ]
+      },
+      phone: {
+        label: "📱 Phone Reset",
+        tasks: [
+          "Delete 15 blurry screenshots or duplicate photos",
+          "Reply to 2 text messages sitting unread",
+          "Clear out old notifications and close background apps",
+          "Delete 2 apps you haven't opened in months",
+          "Plug your phone in to charge for 15 minutes",
+          "Wipe down your phone screen and case",
+          "Turn on Do Not Disturb for 30 minutes of quiet",
+          "Clear out old voicemails or spam texts"
+        ]
+      },
+      pets: {
+        label: "🐾 Pets",
+        tasks: [
+          "Refresh your pet's water bowl with clean water",
+          "Scoop the litter box or pick up yard waste",
+          "Spend 5 focused minutes playing with or brushing your pet",
+          "Wash food and water bowls",
+          "Tidy up scattered pet toys into their basket",
+          "Check pet food and treat supply levels",
+          "Wipe muddy paw prints by the door",
+          "Give your pet some belly rubs and gentle attention"
+        ]
+      },
+      creative: {
+        label: "🎨 Creative & Hobby Corner",
+        tasks: [
+          "Clear off your craft, art, or project table surface",
+          "Put pens, brushes, scissors, or tools back in their bins",
+          "Spend 5 zero-pressure minutes doodling or crafting",
+          "Gather supplies for one project into a single tray",
+          "Toss dried-up pens, scrap trimmings, or unusable bits",
+          "Snap a photo of something you're working on",
+          "Organize one small box or pouch of craft supplies",
+          "Put away one finished project so your space feels fresh"
+        ]
+      },
+      laundry: {
+        label: "🧺 Laundry & Linens",
+        tasks: [
+          "Start one load of laundry in the washer",
+          "Move wet clothes from the washer into the dryer",
+          "Fold or hang up just 10 items from the clean basket",
+          "Match up loose socks",
+          "Strip bedsheets and toss them straight into the washer",
+          "Put away folded clothes sitting on the chair or bed",
+          "Empty the dryer lint trap",
+          "Gather stray towels from around the house into the hamper"
+        ]
+      }
+    };
+
+    const SLICE_COLORS = [
+      "#f3e8ff",
+      "#fce7f3",
+      "#e0f2fe",
+      "#dcfce7",
+      "#fae8ff",
+      "#ede9fe",
+      "#ffe4e6",
+      "#cffafe"
+    ];
+
+    let wheelRotation = 0;
+    let wheelSpinning = false;
+    let currentWheelTask = "";
+
+    function populateWheelCategories() {
+      const sel = document.getElementById("wheelCategorySelect");
+      sel.innerHTML = Object.entries(SMALL_WIN_CATEGORIES).map(([key, val]) =>
+        `<option value="${key}" ${key === state.wheelCategory ? "selected" : ""}>${val.label}</option>`
+      ).join("");
+    }
+
+    function wrapSliceLabel(str) {
+      const words = str.split(" ");
+      const lines = [];
+      let current = "";
+      for (const w of words) {
+        if ((current + " " + w).trim().length <= 15) {
+          current = (current + " " + w).trim();
+        } else {
+          if (current) lines.push(current);
+          current = w;
+        }
+      }
+      if (current) lines.push(current);
+      return lines.slice(0, 3);
+    }
+
+    function renderWheelSvg() {
+      const cat = SMALL_WIN_CATEGORIES[state.wheelCategory] || SMALL_WIN_CATEGORIES.bedroom;
+      const tasks = cat.tasks;
+      const svg = document.getElementById("wheelSvg");
+      const cx = 170, cy = 170, r = 166;
+      const sliceAngle = 360 / tasks.length;
+
+      let markup = "";
+      tasks.forEach((task, i) => {
+        const startDeg = i * sliceAngle - 90;
+        const endDeg = startDeg + sliceAngle;
+        const startRad = (Math.PI / 180) * startDeg;
+        const endRad = (Math.PI / 180) * endDeg;
+
+        const x1 = cx + r * Math.cos(startRad);
+        const y1 = cy + r * Math.sin(startRad);
+        const x2 = cx + r * Math.cos(endRad);
+        const y2 = cy + r * Math.sin(endRad);
+
+        const d = `M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`;
+        const fill = SLICE_COLORS[i % SLICE_COLORS.length];
+
+        const midDeg = startDeg + sliceAngle / 2;
+        const lines = wrapSliceLabel(task);
+
+        markup += `<path d="${d}" fill="${fill}" stroke="#ffffff" stroke-width="2.5"></path>`;
+        markup += `<g transform="translate(${cx},${cy}) rotate(${midDeg})">`;
+        lines.forEach((line, lineIdx) => {
+          const offsetY = (lineIdx - (lines.length - 1) / 2) * 11;
+          markup += `<text x="104" y="${offsetY}" fill="#3b0764" font-size="9.2" font-weight="700" text-anchor="middle" dominant-baseline="middle">${escapeHtml(line)}</text>`;
+        });
+        markup += `</g>`;
+      });
+
+      svg.innerHTML = markup;
+    }
+
+    function spinPrizeWheel() {
+      if (wheelSpinning) return;
+      wheelSpinning = true;
+      getAudioCtx();
+
+      const cat = SMALL_WIN_CATEGORIES[state.wheelCategory] || SMALL_WIN_CATEGORIES.bedroom;
+      const tasks = cat.tasks;
+      const sliceAngle = 360 / tasks.length;
+      const chosenIdx = Math.floor(Math.random() * tasks.length);
+
+      // Slice i occupies [i*45, (i+1)*45] clockwise from top (0 deg).
+      // To bring slice chosenIdx center under top pointer (0 deg), disc angle mod 360 must equal:
+      const targetMod = (360 - (chosenIdx * sliceAngle + sliceAngle / 2) + 360) % 360;
+      const currentMod = ((wheelRotation % 360) + 360) % 360;
+      const delta = (targetMod - currentMod + 360) % 360;
+      const extraSpins = 360 * (4 + Math.floor(Math.random() * 2));
+
+      wheelRotation += extraSpins + delta;
+
+      const disc = document.getElementById("wheelDisc");
+      const spinBtn = document.getElementById("spinWheelBtn");
+      const respinBtn = document.getElementById("wheelRespinBtn");
+      const completeBtn = document.getElementById("wheelCompleteBtn");
+      const badge = document.getElementById("wheelResultBadge");
+      const textEl = document.getElementById("wheelResultText");
+      const pointer = document.getElementById("wheelPointer");
+
+      spinBtn.disabled = true;
+      respinBtn.disabled = true;
+      completeBtn.disabled = true;
+      completeBtn.textContent = "✅ Did It! (+ Win)";
+      badge.textContent = `Spinning ${cat.label}...`;
+      textEl.textContent = "✨ Picking your small win...";
+
+      disc.style.transform = `rotate(${wheelRotation}deg)`;
+
+      // Rhythmic peg ticks that slow down smoothly
+      let tickCount = 0;
+      const totalTicks = 22;
+      function scheduleTick() {
+        if (!wheelSpinning || tickCount >= totalTicks) return;
+        playWheelTick();
+        pointer.classList.add("tick");
+        setTimeout(() => pointer.classList.remove("tick"), 70);
+        tickCount++;
+        const progress = tickCount / totalTicks;
+        const nextDelay = 65 + Math.pow(progress, 2.3) * 310;
+        setTimeout(scheduleTick, nextDelay);
+      }
+      scheduleTick();
+
+      setTimeout(() => {
+        wheelSpinning = false;
+        currentWheelTask = tasks[chosenIdx];
+        spinBtn.disabled = false;
+        respinBtn.disabled = false;
+        completeBtn.disabled = false;
+        badge.textContent = `${cat.label} Win!`;
+        textEl.textContent = currentWheelTask;
+        playSparkleChime();
+      }, 4250);
+    }
+
+    document.getElementById("wheelCategorySelect").addEventListener("change", e => {
+      if (wheelSpinning) return;
+      state.wheelCategory = e.target.value;
+      saveState();
+      renderWheelSvg();
+      currentWheelTask = "";
+      document.getElementById("wheelResultBadge").textContent = "Category Ready";
+      document.getElementById("wheelResultText").textContent = "Tap SPIN! in the center of the wheel for a quick win!";
+      const completeBtn = document.getElementById("wheelCompleteBtn");
+      completeBtn.disabled = true;
+      completeBtn.textContent = "✅ Did It! (+ Win)";
+    });
+
+    document.getElementById("spinWheelBtn").addEventListener("click", spinPrizeWheel);
+    document.getElementById("wheelRespinBtn").addEventListener("click", spinPrizeWheel);
+
+    document.getElementById("wheelCompleteBtn").addEventListener("click", e => {
+      if (!currentWheelTask || wheelSpinning) return;
+      const completed = currentWheelTask;
+      currentWheelTask = "";
+      const completeBtn = document.getElementById("wheelCompleteBtn");
+      completeBtn.disabled = true;
+      completeBtn.textContent = "✨ Logged!";
+      document.getElementById("wheelResultBadge").textContent = "✅ Logged to Today's Wins!";
+      addWin(completed, "wheel", e.currentTarget);
+    });
+
+    // ---------- HEADER CONTROLS ----------
+    document.getElementById("fanfareSelect").addEventListener("change", e => {
+      state.fanfare = e.target.value;
+      saveState();
+      playTrumpetFanfare();
+    });
+
+    function renderMuteButton() {
+      const btn = document.getElementById("muteToggleBtn");
+      btn.textContent = state.muted ? "🔇 Sound Off" : "🔊 Sound On";
+    }
+
+    document.getElementById("muteToggleBtn").addEventListener("click", () => {
+      state.muted = !state.muted;
+      saveState();
+      renderMuteButton();
+      if (!state.muted) playSparkleChime();
+    });
+
+    document.getElementById("freshDayBtn").addEventListener("click", () => {
+      const keepFanfare = state.fanfare;
+      const keepMuted = state.muted;
+      const keepWheelCat = state.wheelCategory;
+      state = {
+        ...DEFAULT_STATE,
+        fanfare: keepFanfare,
+        muted: keepMuted,
+        wheelCategory: keepWheelCat
+      };
+      saveState();
+      renderAll();
+    });
+
+    // ---------- INITIAL RENDER ----------
+    function renderAll() {
+      document.getElementById("fanfareSelect").value = state.fanfare || "derby";
+      renderMuteButton();
+      renderBattery();
+      renderDump();
+      renderNorthStar();
+      renderQuickWins();
+      renderCare();
+      renderPrompt();
+      renderParked();
+      renderWins();
+      populateWheelCategories();
+      renderWheelSvg();
+      updateTimerDisplay();
+    }
+
+    renderAll();
+  </script>
+</body>
+</html>
