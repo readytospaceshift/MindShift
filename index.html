@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✨ Mind Shift: Guided ADHD Brain Dump & Daily Task Organization Tool</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f3e8ff 0%, #fce7f3 30%, #e0f2fe 68%, #ecfdf5 100%);
+      --card-bg: rgba(255, 255, 255, 0.84);
+      --card-border: rgba(216, 180, 254, 0.55);
+      --text-main: #2e1065;
+      --text-muted: #6b5b95;
+      --accent-purple: #8b5cf6;
+      --accent-pink: #ec4899;
+      --accent-cyan: #06b6d4;
+      --accent-mint: #10b981;
+      --iridescent-grad: linear-gradient(135deg, #8b5cf6 0%, #d946ef 48%, #06b6d4 100%);
+      --soft-opal-grad: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(236, 72, 153, 0.14), rgba(6, 182, 212, 0.14));
+      --shadow-soft: 0 10px 30px rgba(139, 92, 246, 0.10), 0 2px 8px rgba(236, 72, 153, 0.06);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      line-height: 1.55;
+      min-height: 100vh;
+      padding: 20px 16px 64px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Pinned floating twinkle layer so it never pushes content down */
+    .sparkles-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .twinkle {
+      position: absolute;
+      color: rgba(168, 85, 247, 0.35);
+      font-size: 1.2rem;
+      animation: floatTwinkle 6s ease-in-out infinite;
+      user-select: none;
+    }
+
+    .twinkle:nth-child(2) { top: 14%; left: 88%; color: rgba(236, 72, 153, 0.32); animation-delay: 1.2s; font-size: 1.4rem; }
+    .twinkle:nth-child(3) { top: 38%; left: 6%; color: rgba(6, 182, 212, 0.35); animation-delay: 2.4s; font-size: 1rem; }
+    .twinkle:nth-child(4) { top: 62%; left: 92%; color: rgba(139, 92, 246, 0.3); animation-delay: 0.7s; font-size: 1.5rem; }
+    .twinkle:nth-child(5) { top: 82%; left: 10%; color: rgba(217, 70, 239, 0.28); animation-delay: 3.1s; font-size: 1.25rem; }
+    .twinkle:nth-child(6) { top: 24%; left: 48%; color: rgba(6, 182, 212, 0.25); animation-delay: 4s; font-size: 0.95rem; }
+
+    @keyframes floatTwinkle {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.45; }
+      50% { transform: translateY(-10px) scale(1.22); opacity: 0.9; }
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 6px 4px 4px;
+    }
+
+    .title-row {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    h1.app-title {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+      white-space: nowrap;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .title-main {
+      font-size: clamp(1.25rem, 3.1vw, 2.05rem);
+      background: var(--iridescent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 10px rgba(168, 85, 247, 0.18));
+    }
+
+    .title-sub {
+      font-size: clamp(0.76rem, 1.88vw, 1.25rem);
+      color: #4c1d95;
+      font-weight: 700;
+    }
+
+    .header-subrow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .sound-picker-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sound-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #6d28d9;
+      padding-left: 2px;
+    }
+
+    select, input[type="text"], textarea {
+      font-family: inherit;
+      font-size: 0.93rem;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(192, 132, 252, 0.55);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus, textarea:focus {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: var(--iridescent-grad);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(168, 85, 247, 0.28);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 18px rgba(217, 70, 239, 0.36);
+      filter: brightness(1.04);
+    }
+
+    .btn-soft {
+      background: rgba(255, 255, 255, 0.92);
+      color: #5b21b6;
+      border: 1.5px solid rgba(192, 132, 252, 0.5);
+    }
+
+    .btn-soft:hover {
+      background: #faf5ff;
+      border-color: var(--accent-purple);
+    }
+
+    .btn-mint {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-mint:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-danger-soft {
+      background: rgba(254, 226, 226, 0.85);
+      color: #b91c1c;
+      border: 1px solid rgba(252, 165, 165, 0.6);
+    }
+
+    .btn-danger-soft:hover {
+      background: #fee2e2;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #3b0764;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .helper-guide {
+      background: var(--soft-opal-grad);
+      border-left: 3.5px solid #a855f7;
+      border-radius: 10px;
+      padding: 9px 13px;
+      font-size: 0.86rem;
+      color: #4c1d95;
+      margin-bottom: 14px;
+    }
+
+    .helper-guide strong {
+      color: #6b21a8;
+    }
+
+    /* 1. Battery Check-In */
+    .battery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .battery-btn {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      padding: 13px 15px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(216, 180, 254, 0.6);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+    }
+
+    .battery-btn.active {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(236, 72, 153, 0.1
