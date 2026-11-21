@@ -275,10 +275,10 @@
       color: #6b21a8;
     }
 
-    /* 1. Battery Check-In */
+    /* 1. Battery Check-In (4 Even Columns) */
     .battery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
       gap: 10px;
     }
 
@@ -286,7 +286,7 @@
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
-      padding: 13px 15px;
+      padding: 13px 14px;
       background: rgba(255, 255, 255, 0.9);
       border: 1.5px solid rgba(216, 180, 254, 0.6);
       border-radius: var(--radius-md);
@@ -301,14 +301,14 @@
 
     .battery-level {
       font-weight: 800;
-      font-size: 0.96rem;
+      font-size: 0.93rem;
     }
 
     .battery-desc {
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 500;
       color: var(--text-muted);
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .battery-advice {
@@ -511,6 +511,7 @@
 
     .win-item {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
@@ -521,6 +522,17 @@
       font-size: 0.9rem;
       font-weight: 600;
       color: #065f46;
+    }
+
+    .win-text {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .win-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .win-time {
@@ -745,7 +757,7 @@
       </div>
     </header>
 
-    <!-- 1. MENTAL BATTERY CHECK-IN -->
+    <!-- 1. MENTAL BATTERY CHECK-IN (4 CONTINUOUS TIERS: 0–100%) -->
     <section class="card">
       <div class="card-header">
         <h2 class="card-title">🔋 1. Mental Battery Check-In</h2>
@@ -754,16 +766,20 @@
         <strong>What to do here:</strong> Tap how your brain feels right now. Matching your task size to your actual fuel stops procrastination before it starts.
       </div>
       <div class="battery-grid" id="batteryGrid">
+        <button type="button" class="battery-btn" data-level="fumes">
+          <span class="battery-level">🪫 Running on Fumes (0–25%)</span>
+          <span class="battery-desc">Foggy, drained, or overstimulated. Micro-steps, water, and rest only.</span>
+        </button>
         <button type="button" class="battery-btn" data-level="low">
-          <span class="battery-level">🪫 Low Battery (15–30%)</span>
-          <span class="battery-desc">Foggy, tired, or overstimulated. Micro-steps &amp; rest only.</span>
+          <span class="battery-level">🔋 Low-to-Moderate (26–50%)</span>
+          <span class="battery-desc">Moving slow. Stick to 5-min quick wins or one tiny step.</span>
         </button>
         <button type="button" class="battery-btn" data-level="steady">
-          <span class="battery-level">🔋 Steady Energy (50–70%)</span>
-          <span class="battery-desc">Functional. One main focus + a couple quick wins.</span>
+          <span class="battery-level">🔋 Steady Energy (51–75%)</span>
+          <span class="battery-desc">Functional &amp; grounded. One main focus + a couple quick wins.</span>
         </button>
         <button type="button" class="battery-btn" data-level="hyperfocus">
-          <span class="battery-level">⚡ Spark / Hyperfocus (85%+)</span>
+          <span class="battery-level">⚡ Spark / Hyperfocus (76–100%)</span>
           <span class="battery-desc">High momentum! Ride the wave—just remember water &amp; breaks.</span>
         </button>
       </div>
@@ -868,13 +884,13 @@
       <ul class="task-list" id="parkedList"></ul>
     </section>
 
-    <!-- 8. REVERSE TO-DO LIST (TODAY'S WINS) -->
+    <!-- 8. REVERSE TO-DO LIST (TODAY'S WINS WITH UNDO BACK TO BRAIN DUMP) -->
     <section class="card">
       <div class="card-header">
         <h2 class="card-title">🏆 8. Reverse To-Do List (Today's Wins)</h2>
       </div>
       <div class="helper-guide">
-        <strong>What to do here:</strong> Every task, self-care chip, and wheel spin you complete automatically lands here so you can actually see how much you accomplished today.
+        <strong>What to do here:</strong> Every task, self-care chip, and wheel spin you complete automatically lands here. Checked something off by accident? Tap <strong>↩️ Dump</strong> to send it straight back to your Brain Dump!
       </div>
       <form class="dump-input-row" id="manualWinForm">
         <input type="text" id="manualWinInput" placeholder="Log something you already did (even brushing teeth counts!)..." autocomplete="off" />
@@ -1130,11 +1146,12 @@
       spawnConfettiBurst(triggerEl);
     }
 
-    // ---------- 1. BATTERY CHECK-IN ----------
+    // ---------- 1. BATTERY CHECK-IN (4 CONTINUOUS TIERS) ----------
     const BATTERY_MESSAGES = {
-      low: "🪫 Low Battery Mode: Shrink your goal to one 2-minute micro-step, hydrate, and drop non-essentials guilt-free.",
-      steady: "🔋 Steady Mode: Pick ONE North Star task, knock out 1–2 quick wins first for dopamine, and pace yourself.",
-      hyperfocus: "⚡ Spark Mode: Ride the wave on your North Star task! Set a 20m timer so you remember to stretch and drink water."
+      fumes: "🪫 Running on Fumes (0–25%): Be extra gentle today. Drink water, pick one 2-minute micro-step or a self-care chip, and rest guilt-free.",
+      low: "🔋 Low-to-Moderate (26–50%): Keep things light. Knock out 1 or 2 five-minute wins or spin the bonus wheel for easy momentum.",
+      steady: "🔋 Steady Energy (51–75%): Great baseline! Pick ONE North Star task, warm up with a quick win, and pace yourself.",
+      hyperfocus: "⚡ Spark / Hyperfocus (76–100%): Ride the momentum wave on your North Star task! Use the 20m timer so you remember water & stretches."
     };
 
     function renderBattery() {
@@ -1465,20 +1482,47 @@
       renderAll();
     });
 
-    // ---------- 8. TODAY'S WINS ----------
+    // ---------- 8. TODAY'S WINS (WITH UNDO BACK TO BRAIN DUMP) ----------
     function renderWins() {
       const list = document.getElementById("winsList");
       if (!state.wins.length) {
         list.innerHTML = `<li class="empty-note">Your completed tasks, self-care chips, and prize wheel wins will appear here!</li>`;
         return;
       }
-      list.innerHTML = state.wins.map(w => `
+      list.innerHTML = state.wins.map((w, idx) => `
         <li class="win-item">
-          <span>✨ ${escapeHtml(w.text)}</span>
-          <span class="win-time">${escapeHtml(w.time)}</span>
+          <span class="win-text">✨ ${escapeHtml(w.text)}</span>
+          <div class="win-meta">
+            <span class="win-time">${escapeHtml(w.time)}</span>
+            <button type="button" class="btn-soft mini-btn" data-waction="undump" data-idx="${idx}" title="Move back to Brain Dump">↩️ Dump</button>
+          </div>
         </li>
       `).join("");
     }
+
+    document.getElementById("winsList").addEventListener("click", e => {
+      const btn = e.target.closest("button[data-waction='undump']");
+      if (!btn) return;
+      const idx = Number(btn.dataset.idx);
+      const winItem = state.wins[idx];
+      if (!winItem) return;
+
+      // Remove from Today's Wins
+      state.wins.splice(idx, 1);
+
+      // If it came from a Self-Care chip, uncheck that chip; otherwise send clean text back to Brain Dump
+      if (winItem.text.startsWith("Self-Care: ")) {
+        const careLabel = winItem.text.replace("Self-Care: ", "");
+        const careIdx = state.careDone.indexOf(careLabel);
+        if (careIdx !== -1) state.careDone.splice(careIdx, 1);
+        state.dump.unshift(careLabel);
+      } else {
+        state.dump.unshift(winItem.text);
+      }
+
+      saveState();
+      renderAll();
+    });
 
     document.getElementById("manualWinForm").addEventListener("submit", e => {
       e.preventDefault();
@@ -1773,8 +1817,6 @@
       const sliceAngle = 360 / tasks.length;
       const chosenIdx = Math.floor(Math.random() * tasks.length);
 
-      // Slice i occupies [i*45, (i+1)*45] clockwise from top (0 deg).
-      // To bring slice chosenIdx center under top pointer (0 deg), disc angle mod 360 must equal:
       const targetMod = (360 - (chosenIdx * sliceAngle + sliceAngle / 2) + 360) % 360;
       const currentMod = ((wheelRotation % 360) + 360) % 360;
       const delta = (targetMod - currentMod + 360) % 360;
@@ -1799,7 +1841,6 @@
 
       disc.style.transform = `rotate(${wheelRotation}deg)`;
 
-      // Rhythmic peg ticks that slow down smoothly
       let tickCount = 0;
       const totalTicks = 22;
       function scheduleTick() {
