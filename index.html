@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +8,8 @@
   <style>
     :root {
       --bg-gradient: linear-gradient(135deg, #f3e8ff 0%, #fce7f3 30%, #e0f2fe 68%, #ecfdf5 100%);
-      --card-bg: rgba(255, 255, 255, 0.84);
-      --card-border: rgba(216, 180, 254, 0.55);
+      --card-bg: rgba(255, 255, 255, 0.86);
+      --card-border: rgba(216, 180, 254, 0.58);
       --text-main: #2e1065;
       --text-muted: #6b5b95;
       --accent-purple: #8b5cf6;
@@ -41,13 +42,10 @@
       overflow-x: hidden;
     }
 
-    /* Pinned floating twinkle layer so it never pushes content down */
+    /* Pinned fixed sparkle layer so there is zero gap at the top */
     .sparkles-layer {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
@@ -61,6 +59,7 @@
       user-select: none;
     }
 
+    .twinkle:nth-child(1) { top: 8%; left: 12%; }
     .twinkle:nth-child(2) { top: 14%; left: 88%; color: rgba(236, 72, 153, 0.32); animation-delay: 1.2s; font-size: 1.4rem; }
     .twinkle:nth-child(3) { top: 38%; left: 6%; color: rgba(6, 182, 212, 0.35); animation-delay: 2.4s; font-size: 1rem; }
     .twinkle:nth-child(4) { top: 62%; left: 92%; color: rgba(139, 92, 246, 0.3); animation-delay: 0.7s; font-size: 1.5rem; }
@@ -128,10 +127,36 @@
       gap: 12px;
     }
 
+    .subtitle-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
     .subtitle {
       font-size: 0.95rem;
       color: var(--text-muted);
       font-weight: 500;
+    }
+
+    .save-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #065f46;
+      background: rgba(236, 253, 245, 0.92);
+      border: 1px solid rgba(110, 231, 183, 0.85);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
+    .save-status-pill.warning {
+      color: #92400e;
+      background: rgba(254, 243, 199, 0.95);
+      border-color: rgba(251, 191, 36, 0.85);
     }
 
     .header-controls {
@@ -158,7 +183,7 @@
       font-family: inherit;
       font-size: 0.93rem;
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1.5px solid rgba(192, 132, 252, 0.55);
       border-radius: var(--radius-sm);
       padding: 8px 12px;
@@ -190,24 +215,30 @@
       transform: scale(0.97);
     }
 
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .btn-primary {
       background: var(--iridescent-grad);
       color: #ffffff;
       box-shadow: 0 4px 14px rgba(168, 85, 247, 0.28);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
       box-shadow: 0 6px 18px rgba(217, 70, 239, 0.36);
       filter: brightness(1.04);
     }
 
     .btn-soft {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       color: #5b21b6;
       border: 1.5px solid rgba(192, 132, 252, 0.5);
     }
 
-    .btn-soft:hover {
+    .btn-soft:hover:not(:disabled) {
       background: #faf5ff;
       border-color: var(--accent-purple);
     }
@@ -218,18 +249,66 @@
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
     }
 
-    .btn-mint:hover {
+    .btn-mint:hover:not(:disabled) {
       filter: brightness(1.05);
     }
 
     .btn-danger-soft {
-      background: rgba(254, 226, 226, 0.85);
+      background: rgba(254, 226, 226, 0.88);
       color: #b91c1c;
-      border: 1px solid rgba(252, 165, 165, 0.6);
+      border: 1px solid rgba(252, 165, 165, 0.65);
     }
 
-    .btn-danger-soft:hover {
+    .btn-danger-soft:hover:not(:disabled) {
       background: #fee2e2;
+    }
+
+    /* Backup Drawer */
+    .backup-drawer {
+      display: none;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1.5px solid rgba(168, 85, 247, 0.55);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-soft);
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .backup-drawer.open {
+      display: flex;
+    }
+
+    .backup-drawer-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #4c1d95;
+    }
+
+    .backup-drawer-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .backup-textarea {
+      width: 100%;
+      min-height: 68px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      resize: vertical;
+    }
+
+    .backup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .backup-msg {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #047857;
     }
 
     /* Cards */
@@ -275,7 +354,7 @@
       color: #6b21a8;
     }
 
-    /* 1. Battery Check-In (4 Even Columns) */
+    /* 1. Battery Check-In */
     .battery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
@@ -287,7 +366,7 @@
       align-items: flex-start;
       text-align: left;
       padding: 13px 14px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       border: 1.5px solid rgba(216, 180, 254, 0.6);
       border-radius: var(--radius-md);
       color: var(--text-main);
@@ -316,7 +395,7 @@
       font-size: 0.88rem;
       font-weight: 600;
       color: #6d28d9;
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.82);
       padding: 9px 12px;
       border-radius: 10px;
       border: 1px dashed rgba(168, 85, 247, 0.45);
@@ -331,6 +410,7 @@
 
     .dump-input-row input {
       flex: 1;
+      min-width: 0;
     }
 
     .task-list {
@@ -346,7 +426,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1px solid rgba(216, 180, 254, 0.6);
       border-radius: var(--radius-sm);
       padding: 9px 12px;
@@ -354,14 +434,16 @@
 
     .task-text {
       flex: 1;
-      min-width: 180px;
+      min-width: 150px;
       font-size: 0.94rem;
       font-weight: 500;
+      word-break: break-word;
     }
 
     .task-actions {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 5px;
     }
 
@@ -371,11 +453,12 @@
       border-radius: 8px;
     }
 
-    /* Two-column middle row */
+    /* Two-column balanced row */
     .two-col {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 20px;
+      align-items: start;
     }
 
     /* 3. Rule of One */
@@ -406,7 +489,7 @@
     }
 
     .first-step-box {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       border: 1.5px dashed rgba(168, 85, 247, 0.55);
       border-radius: var(--radius-sm);
       padding: 10px 12px;
@@ -441,7 +524,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       padding: 10px 12px;
       border-radius: var(--radius-sm);
       border: 1px solid rgba(216, 180, 254, 0.6);
@@ -465,16 +548,83 @@
     /* 4. 5-Min Wins */
     .quick-win-item {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(167, 243, 208, 0.9);
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(167, 243, 208, 0.95);
       border-radius: var(--radius-sm);
       padding: 8px 11px;
     }
 
-    /* 5. Self Care Chips */
+    /* 5. Daily Anchors (Repeating Habits) */
+    .anchor-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1.5px solid rgba(216, 180, 254, 0.68);
+      border-radius: var(--radius-sm);
+      padding: 8px 11px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .anchor-item.is-done {
+      background: linear-gradient(135deg, rgba(209, 250, 229, 0.9), rgba(207, 250, 254, 0.9));
+      border-color: #10b981;
+    }
+
+    .anchor-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 150px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .anchor-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 2px solid #a855f7;
+      background: #ffffff;
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+    }
+
+    .anchor-check.checked {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      border-color: #059669;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.28);
+    }
+
+    .anchor-text {
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: var(--text-main);
+      word-break: break-word;
+      transition: color 0.18s ease;
+    }
+
+    .anchor-text.done {
+      text-decoration: line-through;
+      color: #065f46;
+      opacity: 0.85;
+    }
+
+    /* 6. Self Care Chips */
     .care-grid {
       display: flex;
       flex-wrap: wrap;
@@ -482,7 +632,7 @@
     }
 
     .care-chip {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1.5px solid rgba(216, 180, 254, 0.65);
       color: #4c1d95;
       border-radius: 999px;
@@ -498,9 +648,9 @@
       text-decoration: line-through;
     }
 
-    /* 6. Gentle Unsticking Prompt */
+    /* 7. Gentle Unsticking Prompt */
     .prompt-box {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1.5px solid rgba(192, 132, 252, 0.6);
       border-radius: var(--radius-md);
       padding: 14px 16px;
@@ -516,7 +666,7 @@
       resize: vertical;
     }
 
-    /* 7. Later, Not Never (Parked Items with Reorder) */
+    /* 8. Later, Not Never (Parked Items with Reorder) */
     .rank-badge {
       display: inline-flex;
       align-items: center;
@@ -531,7 +681,7 @@
       flex-shrink: 0;
     }
 
-    /* 8. Today's Wins */
+    /* 9. Today's Wins */
     .wins-list {
       list-style: none;
       display: flex;
@@ -545,8 +695,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      background: linear-gradient(135deg, rgba(236, 253, 245, 0.95), rgba(240, 249, 255, 0.95));
-      border: 1px solid rgba(110, 231, 183, 0.75);
+      background: linear-gradient(135deg, rgba(236, 253, 245, 0.96), rgba(240, 249, 255, 0.96));
+      border: 1px solid rgba(110, 231, 183, 0.78);
       border-radius: var(--radius-sm);
       padding: 8px 12px;
       font-size: 0.9rem;
@@ -557,6 +707,7 @@
     .win-text {
       flex: 1;
       min-width: 180px;
+      word-break: break-word;
     }
 
     .win-meta {
@@ -656,21 +807,15 @@
       cursor: pointer;
     }
 
-    .wheel-hub-btn:hover {
+    .wheel-hub-btn:hover:not(:disabled) {
       transform: scale(1.06);
-    }
-
-    .wheel-hub-btn:disabled {
-      opacity: 0.78;
-      cursor: not-allowed;
-      transform: none;
     }
 
     .wheel-result-panel {
       flex: 1;
       min-width: 260px;
       max-width: 440px;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1.5px solid rgba(192, 132, 252, 0.65);
       border-radius: var(--radius-md);
       padding: 18px;
@@ -748,9 +893,8 @@
   </style>
 </head>
 <body>
-  <!-- Floating background stars -->
   <div class="sparkles-layer" aria-hidden="true">
-    <span class="twinkle" style="top: 8%; left: 12%;">✦</span>
+    <span class="twinkle">✦</span>
     <span class="twinkle">✧</span>
     <span class="twinkle">⋆</span>
     <span class="twinkle">✦</span>
@@ -768,7 +912,10 @@
       </div>
 
       <div class="header-subrow">
-        <p class="subtitle">Externalize the mental noise. Pick one thing. Be kind to your brain.</p>
+        <div class="subtitle-group">
+          <p class="subtitle">Externalize the mental noise. Pick one thing. Be kind to your brain.</p>
+          <span class="save-status-pill" id="saveStatusPill">💾 Auto-Saved (Multi-Layer)</span>
+        </div>
 
         <div class="header-controls">
           <div class="sound-picker-group">
@@ -782,12 +929,28 @@
             </select>
           </div>
           <button id="muteToggleBtn" class="btn-soft" type="button">🔊 Sound On</button>
+          <button id="backupToggleBtn" class="btn-soft" type="button">📋 Backup</button>
           <button id="freshDayBtn" class="btn-danger-soft" type="button">Fresh Day Reset</button>
+        </div>
+      </div>
+
+      <!-- Portable Backup / Restore Drawer -->
+      <div class="backup-drawer" id="backupDrawer">
+        <div class="backup-drawer-title">📋 Portable Save Code (Extra Safety Net)</div>
+        <div class="backup-drawer-desc">
+          Your progress automatically mirrors across browser storage, IndexedDB, and tab memory so closing or discarding tabs won't wipe your goals, daily anchors, or parked tasks. You can also copy this code anytime to back up or transfer across devices:
+        </div>
+        <textarea class="backup-textarea" id="backupCodeBox" spellcheck="false" placeholder="Your save code appears here..."></textarea>
+        <div class="backup-actions">
+          <button type="button" class="btn-primary mini-btn" id="copyBackupBtn">📋 Copy Save Code</button>
+          <button type="button" class="btn-mint mini-btn" id="restoreBackupBtn">♻️ Restore From Code</button>
+          <button type="button" class="btn-soft mini-btn" id="closeBackupBtn">Close</button>
+          <span class="backup-msg" id="backupMsg"></span>
         </div>
       </div>
     </header>
 
-    <!-- 1. MENTAL BATTERY CHECK-IN (4 CONTINUOUS TIERS: 0–100%) -->
+    <!-- 1. MENTAL BATTERY CHECK-IN -->
     <section class="card">
       <div class="card-header">
         <h2 class="card-title">🔋 1. Mental Battery Check-In</h2>
@@ -833,37 +996,37 @@
       <ul class="task-list" id="dumpList"></ul>
     </section>
 
-    <!-- 3 & 4. RULE OF ONE + 5-MIN DOPAMINE WINS -->
-    <div class="two-col">
-      <!-- 3. RULE OF ONE -->
-      <section class="card">
-        <div class="card-header">
-          <h2 class="card-title">🎯 3. The Rule of One (North Star)</h2>
+    <!-- 3. THE RULE OF ONE (NORTH STAR) -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">🎯 3. The Rule of One (North Star)</h2>
+      </div>
+      <div class="helper-guide">
+        <strong>What to do here:</strong> Keep <em>only one</em> main task here at a time so your brain isn't paralyzed by ten competing priorities.
+      </div>
+      <div class="north-star-box">
+        <div class="north-star-label">Current Single Focus</div>
+        <div class="north-star-text" id="northStarText">No focus task chosen yet — pick one from your Brain Dump!</div>
+        <div id="northStarStarterWrap"></div>
+        <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;" id="northStarActions"></div>
+      </div>
+      <div class="timer-bar">
+        <div class="timer-presets">
+          <button type="button" class="btn-soft mini-btn timer-preset" data-mins="2">2m (Micro-Step)</button>
+          <button type="button" class="btn-soft mini-btn timer-preset" data-mins="5">5m</button>
+          <button type="button" class="btn-soft mini-btn timer-preset" data-mins="10">10m</button>
+          <button type="button" class="btn-soft mini-btn timer-preset" data-mins="20">20m</button>
         </div>
-        <div class="helper-guide">
-          <strong>What to do here:</strong> Keep <em>only one</em> main task here at a time so your brain isn't paralyzed by ten competing priorities.
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span class="timer-display" id="timerDisplay">02:00</span>
+          <button type="button" class="btn-primary mini-btn" id="timerStartBtn">▶ Start</button>
+          <button type="button" class="btn-soft mini-btn" id="timerResetBtn">↺</button>
         </div>
-        <div class="north-star-box">
-          <div class="north-star-label">Current Single Focus</div>
-          <div class="north-star-text" id="northStarText">No focus task chosen yet — pick one from your Brain Dump!</div>
-          <div id="northStarStarterWrap"></div>
-          <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;" id="northStarActions"></div>
-        </div>
-        <div class="timer-bar">
-          <div class="timer-presets">
-            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="2">2m (Micro-Step)</button>
-            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="5">5m</button>
-            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="10">10m</button>
-            <button type="button" class="btn-soft mini-btn timer-preset" data-mins="20">20m</button>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span class="timer-display" id="timerDisplay">02:00</span>
-            <button type="button" class="btn-primary mini-btn" id="timerStartBtn">▶ Start</button>
-            <button type="button" class="btn-soft mini-btn" id="timerResetBtn">↺</button>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
+    <!-- 4 & 5. 5-MIN DOPAMINE WINS + DAILY ANCHORS (REPEATING HABITS) -->
+    <div class="two-col">
       <!-- 4. 5-MIN DOPAMINE WINS -->
       <section class="card">
         <div class="card-header">
@@ -878,12 +1041,27 @@
         </form>
         <ul class="task-list" id="quickWinList"></ul>
       </section>
+
+      <!-- 5. DAILY ANCHORS (REPEATING HABITS) -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">🔁 5. Daily Anchors (Repeating Habits)</h2>
+        </div>
+        <div class="helper-guide">
+          <strong>What to do here:</strong> Check off repeating daily routines so you never wonder <em>"Did I already do that today?"</em> Checked items stay crossed off until you press <strong>Fresh Day Reset</strong>. Add, remove, or reorder with <strong>↑ / ↓</strong> anytime!
+        </div>
+        <form class="dump-input-row" id="habitForm">
+          <input type="text" id="habitInput" placeholder="Add a repeating daily task (e.g., feed sourdough starter)..." autocomplete="off" />
+          <button type="submit" class="btn-primary">+ Add Anchor</button>
+        </form>
+        <ul class="task-list" id="habitList"></ul>
+      </section>
     </div>
 
-    <!-- 5. BODY & SENSORY CHECK (12 ITEMS) -->
+    <!-- 6. BODY & SENSORY CHECK -->
     <section class="card">
       <div class="card-header">
-        <h2 class="card-title">🌿 5. Body &amp; Sensory Check (Basic Needs)</h2>
+        <h2 class="card-title">🌿 6. Body &amp; Sensory Check (Basic Needs)</h2>
       </div>
       <div class="helper-guide">
         <strong>What to do here:</strong> Executive dysfunction is often thirst, hunger, or sensory overload in disguise. Tap any chip you've done for an instant sparkle boost!
@@ -891,10 +1069,10 @@
       <div class="care-grid" id="careGrid"></div>
     </section>
 
-    <!-- 6. GENTLE UNSTICKING PROMPT -->
+    <!-- 7. GENTLE UNSTICKING PROMPT -->
     <section class="card">
       <div class="card-header">
-        <h2 class="card-title">✨ 6. Gentle Unsticking Prompt</h2>
+        <h2 class="card-title">✨ 7. Gentle Unsticking Prompt</h2>
         <button type="button" class="btn-soft mini-btn" id="shufflePromptBtn">Shuffle Prompt ↻</button>
       </div>
       <div class="helper-guide">
@@ -904,24 +1082,24 @@
       <textarea class="prompt-reply" id="promptReply" placeholder="Jot a quick, zero-pressure answer here..."></textarea>
     </section>
 
-    <!-- 7. LATER, NOT NEVER (PARKED & PERSISTENT) -->
+    <!-- 8. LATER, NOT NEVER (PARKED & PERSISTENT) -->
     <section class="card">
       <div class="card-header">
-        <h2 class="card-title">🅿️ 7. Later, Not Never (Parked Ideas)</h2>
+        <h2 class="card-title">🅿️ 8. Later, Not Never (Parked Ideas)</h2>
       </div>
       <div class="helper-guide">
-        <strong>What to do here:</strong> Safely park non-urgent ideas here—they stay saved forever even when you click <em>Fresh Day Reset</em>, until you manually focus, check off, or delete them!
+        <strong>What to do here:</strong> Safely park non-urgent ideas here—they stay saved across tabs, browser restarts, and <em>Fresh Day Reset</em> until you manually focus, check off, or delete them!
       </div>
       <ul class="task-list" id="parkedList"></ul>
     </section>
 
-    <!-- 8. REVERSE TO-DO LIST (TODAY'S WINS WITH UNDO BACK TO BRAIN DUMP) -->
+    <!-- 9. REVERSE TO-DO LIST (TODAY'S WINS) -->
     <section class="card">
       <div class="card-header">
-        <h2 class="card-title">🏆 8. Reverse To-Do List (Today's Wins)</h2>
+        <h2 class="card-title">🏆 9. Reverse To-Do List (Today's Wins)</h2>
       </div>
       <div class="helper-guide">
-        <strong>What to do here:</strong> Every task, self-care chip, and wheel spin you complete automatically lands here. Checked something off by accident? Tap <strong>↩️ Dump</strong> to send it straight back to your Brain Dump!
+        <strong>What to do here:</strong> Every task, daily anchor, self-care chip, and wheel spin you complete automatically lands here. Checked something off by accident? Tap <strong>↩️ Dump</strong> to undo it!
       </div>
       <form class="dump-input-row" id="manualWinForm">
         <input type="text" id="manualWinInput" placeholder="Log something you already did (even brushing teeth counts!)..." autocomplete="off" />
@@ -966,9 +1144,24 @@
   </div>
 
   <script>
-    // ---------- STATE & STORAGE MIGRATION ----------
+    // ---------- SELF-HEALING MULTI-LAYER PERSISTENCE ENGINE ----------
     const STORAGE_KEY = "mindshift_adhd_state_v1";
+    const BACKUP_KEY = "mindshift_adhd_state_backup_v1";
     const LEGACY_KEYS = ["meloflow_adhd_state_v1", "adhd_brain_dump_state_v1"];
+    const IDB_NAME = "MindShiftPersistentDB";
+    const IDB_STORE = "appState";
+    const WINDOW_PREFIX = "MINDSHIFT_STATE::";
+
+    const DEFAULT_DAILY_HABITS = [
+      { id: "habit_supplements", text: "💊 Take supplements", done: false },
+      { id: "habit_sourdough", text: "🍞 Feed sourdough starter", done: false },
+      { id: "habit_cats", text: "🐾 Feed cats", done: false },
+      { id: "habit_water", text: "💧 Refill water bottle", done: false }
+    ];
+
+    function cloneDefaultHabits() {
+      return DEFAULT_DAILY_HABITS.map(h => ({ ...h }));
+    }
 
     const DEFAULT_STATE = {
       battery: "",
@@ -976,6 +1169,7 @@
       northStar: "",
       northStarFirstStep: "",
       quickWins: [],
+      dailyHabits: cloneDefaultHabits(),
       careDone: [],
       promptIndex: 0,
       promptReply: "",
@@ -983,35 +1177,227 @@
       wins: [],
       fanfare: "derby",
       muted: false,
-      wheelCategory: "bedroom"
+      wheelCategory: "bedroom",
+      updatedAt: 0
     };
 
-    function loadState() {
+    function normalizeHabits(rawHabits) {
+      if (!Array.isArray(rawHabits)) return cloneDefaultHabits();
+      return rawHabits
+        .filter(h => h && typeof h.text === "string" && h.text.trim())
+        .map((h, i) => ({
+          id: typeof h.id === "string" && h.id ? h.id : `habit_${Date.now()}_${i}`,
+          text: h.text.trim(),
+          done: Boolean(h.done)
+        }));
+    }
+
+    function normalizeState(rawObj) {
+      if (!rawObj || typeof rawObj !== "object") {
+        return { ...DEFAULT_STATE, dailyHabits: cloneDefaultHabits() };
+      }
+      return {
+        battery: typeof rawObj.battery === "string" ? rawObj.battery : "",
+        dump: Array.isArray(rawObj.dump) ? rawObj.dump : [],
+        northStar: typeof rawObj.northStar === "string" ? rawObj.northStar : "",
+        northStarFirstStep: typeof rawObj.northStarFirstStep === "string" ? rawObj.northStarFirstStep : "",
+        quickWins: Array.isArray(rawObj.quickWins) ? rawObj.quickWins : [],
+        dailyHabits: Array.isArray(rawObj.dailyHabits) ? normalizeHabits(rawObj.dailyHabits) : cloneDefaultHabits(),
+        careDone: Array.isArray(rawObj.careDone) ? rawObj.careDone : [],
+        promptIndex: typeof rawObj.promptIndex === "number" ? rawObj.promptIndex : 0,
+        promptReply: typeof rawObj.promptReply === "string" ? rawObj.promptReply : "",
+        parked: Array.isArray(rawObj.parked) ? rawObj.parked : [],
+        wins: Array.isArray(rawObj.wins) ? rawObj.wins : [],
+        fanfare: typeof rawObj.fanfare === "string" ? rawObj.fanfare : "derby",
+        muted: Boolean(rawObj.muted),
+        wheelCategory: typeof rawObj.wheelCategory === "string" ? rawObj.wheelCategory : "bedroom",
+        updatedAt: typeof rawObj.updatedAt === "number" ? rawObj.updatedAt : 0
+      };
+    }
+
+    function stateRichness(s) {
+      if (!s) return 0;
+      const doneHabitsCount = Array.isArray(s.dailyHabits) ? s.dailyHabits.filter(h => h && h.done).length : 0;
+      const customHabitsDelta = Array.isArray(s.dailyHabits) && s.dailyHabits.length !== DEFAULT_DAILY_HABITS.length ? 2 : 0;
+      return (
+        (s.parked ? s.parked.length * 3 : 0) +
+        (s.wins ? s.wins.length * 3 : 0) +
+        (s.dump ? s.dump.length * 2 : 0) +
+        (s.quickWins ? s.quickWins.length * 2 : 0) +
+        (s.northStar ? 3 : 0) +
+        doneHabitsCount * 2 +
+        customHabitsDelta +
+        (s.careDone ? s.careDone.length : 0) +
+        (s.battery ? 1 : 0) +
+        (s.promptReply ? 1 : 0)
+      );
+    }
+
+    function pickBestCandidate(candidates) {
+      const valid = candidates.filter(Boolean).map(normalizeState);
+      if (!valid.length) return { ...DEFAULT_STATE, dailyHabits: cloneDefaultHabits() };
+      valid.sort((a, b) => {
+        if (b.updatedAt !== a.updatedAt) return b.updatedAt - a.updatedAt;
+        return stateRichness(b) - stateRichness(a);
+      });
+      return valid[0];
+    }
+
+    function safeParseJSON(str) {
+      if (!str || typeof str !== "string") return null;
       try {
-        let raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) {
-          for (const oldKey of LEGACY_KEYS) {
-            const legacy = localStorage.getItem(oldKey);
-            if (legacy) {
-              raw = legacy;
-              localStorage.setItem(STORAGE_KEY, legacy);
-              break;
-            }
-          }
-        }
-        return raw ? { ...DEFAULT_STATE, ...JSON.parse(raw) } : { ...DEFAULT_STATE };
+        return JSON.parse(str);
       } catch (e) {
-        return { ...DEFAULT_STATE };
+        return null;
       }
     }
 
-    let state = loadState();
-
-    function saveState() {
+    function readSyncCandidates() {
+      const list = [];
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        const primary = safeParseJSON(localStorage.getItem(STORAGE_KEY));
+        if (primary) list.push(primary);
+        const backup = safeParseJSON(localStorage.getItem(BACKUP_KEY));
+        if (backup) list.push(backup);
+        for (const oldKey of LEGACY_KEYS) {
+          const leg = safeParseJSON(localStorage.getItem(oldKey));
+          if (leg) list.push(leg);
+        }
       } catch (e) {}
+
+      try {
+        if (typeof window.name === "string" && window.name.startsWith(WINDOW_PREFIX)) {
+          const winObj = safeParseJSON(window.name.slice(WINDOW_PREFIX.length));
+          if (winObj) list.push(winObj);
+        }
+      } catch (e) {}
+
+      return list;
     }
+
+    function openIDB() {
+      return new Promise((resolve, reject) => {
+        if (!window.indexedDB) return reject(new Error("No IDB"));
+        const req = indexedDB.open(IDB_NAME, 1);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains(IDB_STORE)) {
+            db.createObjectStore(IDB_STORE);
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function writeIDB(snapshot) {
+      try {
+        const db = await openIDB();
+        return await new Promise(resolve => {
+          const tx = db.transaction(IDB_STORE, "readwrite");
+          tx.objectStore(IDB_STORE).put(snapshot, STORAGE_KEY);
+          tx.oncomplete = () => { db.close(); resolve(true); };
+          tx.onerror = () => { db.close(); resolve(false); };
+        });
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function readIDB() {
+      try {
+        const db = await openIDB();
+        return await new Promise(resolve => {
+          const tx = db.transaction(IDB_STORE, "readonly");
+          const req = tx.objectStore(IDB_STORE).get(STORAGE_KEY);
+          req.onsuccess = () => { db.close(); resolve(req.result || null); };
+          req.onerror = () => { db.close(); resolve(null); };
+        });
+      } catch (e) {
+        return null;
+      }
+    }
+
+    let state = pickBestCandidate(readSyncCandidates());
+
+    function updateSavePill(ok, customText) {
+      const pill = document.getElementById("saveStatusPill");
+      if (!pill) return;
+      if (ok) {
+        pill.classList.remove("warning");
+        const timeStr = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+        pill.textContent = customText || `💾 Auto-Saved (${timeStr})`;
+      } else {
+        pill.classList.add("warning");
+        pill.textContent = customText || "⚠️ Browser blocked storage — use 📋 Backup";
+      }
+    }
+
+    function saveState(explicitReset = false) {
+      if (!explicitReset) {
+        const existingSync = pickBestCandidate(readSyncCandidates());
+        if (stateRichness(state) === 0 && stateRichness(existingSync) > 0 && existingSync.updatedAt >= state.updatedAt) {
+          state = existingSync;
+          return;
+        }
+      }
+
+      state.updatedAt = Date.now();
+      const serialized = JSON.stringify(state);
+      let syncOk = false;
+
+      try {
+        localStorage.setItem(STORAGE_KEY, serialized);
+        localStorage.setItem(BACKUP_KEY, serialized);
+        syncOk = true;
+      } catch (e) {}
+
+      try {
+        window.name = WINDOW_PREFIX + serialized;
+        syncOk = true;
+      } catch (e) {}
+
+      writeIDB(normalizeState(state)).then(idbOk => {
+        updateSavePill(syncOk || idbOk);
+      });
+
+      updateSavePill(syncOk);
+
+      const drawer = document.getElementById("backupDrawer");
+      if (drawer && drawer.classList.contains("open")) {
+        document.getElementById("backupCodeBox").value = serialized;
+      }
+    }
+
+    async function hydrateAndSelfHeal() {
+      try {
+        if (navigator.storage && navigator.storage.persist) {
+          navigator.storage.persist().catch(() => {});
+        }
+      } catch (e) {}
+
+      const idbData = await readIDB();
+      const syncList = readSyncCandidates();
+      const best = pickBestCandidate([...syncList, idbData]);
+
+      if (best.updatedAt > state.updatedAt || (stateRichness(best) > stateRichness(state) && state.updatedAt === 0)) {
+        state = best;
+        saveState();
+        renderAll();
+      } else if (stateRichness(state) > 0) {
+        saveState();
+      }
+    }
+
+    window.addEventListener("pagehide", () => saveState());
+    window.addEventListener("beforeunload", () => saveState());
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        saveState();
+      } else if (document.visibilityState === "visible") {
+        hydrateAndSelfHeal();
+      }
+    });
 
     // ---------- WEB AUDIO ENGINE ----------
     let audioCtx = null;
@@ -1178,7 +1564,7 @@
       spawnConfettiBurst(triggerEl);
     }
 
-    // ---------- 1. BATTERY CHECK-IN (4 CONTINUOUS TIERS) ----------
+    // ---------- 1. BATTERY CHECK-IN ----------
     const BATTERY_MESSAGES = {
       fumes: "🪫 Running on Fumes (0–25%): Be extra gentle today. Drink water, pick one 2-minute micro-step or a self-care chip, and rest guilt-free.",
       low: "🔋 Low-to-Moderate (26–50%): Keep things light. Knock out 1 or 2 five-minute wins or spin the bonus wheel for easy momentum.",
@@ -1204,7 +1590,7 @@
 
     // ---------- 2. BRAIN DUMP ----------
     function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+      return String(str).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
 
     function renderDump() {
@@ -1430,7 +1816,101 @@
       }
     });
 
-    // ---------- 5. BODY & SENSORY CHECK (12 ITEMS) ----------
+    // ---------- 5. DAILY ANCHORS (REPEATING HABITS) ----------
+    function renderDailyHabits() {
+      const list = document.getElementById("habitList");
+      if (!Array.isArray(state.dailyHabits)) {
+        state.dailyHabits = cloneDefaultHabits();
+      }
+      if (!state.dailyHabits.length) {
+        list.innerHTML = `<li class="empty-note">No daily anchors yet. Add any repeating routine above (like taking meds or feeding pets)!</li>`;
+        return;
+      }
+      list.innerHTML = state.dailyHabits.map((habit, idx) => `
+        <li class="anchor-item ${habit.done ? "is-done" : ""}">
+          <div class="anchor-main" data-haction="toggle" data-idx="${idx}" role="checkbox" aria-checked="${habit.done}" tabindex="0">
+            <button type="button" class="anchor-check ${habit.done ? "checked" : ""}" data-haction="toggle" data-idx="${idx}" aria-label="Mark ${escapeHtml(habit.text)} ${habit.done ? "not done" : "done"}">${habit.done ? "✓" : ""}</button>
+            <span class="anchor-text ${habit.done ? "done" : ""}">${escapeHtml(habit.text)}</span>
+          </div>
+          <div class="task-actions">
+            <button type="button" class="btn-soft mini-btn" data-haction="up" data-idx="${idx}" ${idx === 0 ? "disabled" : ""} title="Move up">↑</button>
+            <button type="button" class="btn-soft mini-btn" data-haction="down" data-idx="${idx}" ${idx === state.dailyHabits.length - 1 ? "disabled" : ""} title="Move down">↓</button>
+            <button type="button" class="btn-danger-soft mini-btn" data-haction="del" data-idx="${idx}" title="Remove daily anchor">✕</button>
+          </div>
+        </li>
+      `).join("");
+    }
+
+    document.getElementById("habitForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("habitInput");
+      const val = input.value.trim();
+      if (!val) return;
+      if (!Array.isArray(state.dailyHabits)) state.dailyHabits = [];
+      state.dailyHabits.push({
+        id: `habit_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        text: val,
+        done: false
+      });
+      input.value = "";
+      saveState();
+      renderDailyHabits();
+    });
+
+    function toggleHabitAt(idx, triggerEl) {
+      const habit = state.dailyHabits[idx];
+      if (!habit) return;
+      habit.done = !habit.done;
+      const winLabel = `Daily Anchor: ${habit.text}`;
+
+      if (habit.done) {
+        saveState();
+        renderDailyHabits();
+        addWin(winLabel, "care", triggerEl);
+      } else {
+        const winIdx = state.wins.findIndex(w => w.text === winLabel);
+        if (winIdx !== -1) state.wins.splice(winIdx, 1);
+        saveState();
+        renderDailyHabits();
+        renderWins();
+      }
+    }
+
+    document.getElementById("habitList").addEventListener("click", e => {
+      const target = e.target.closest("[data-haction]");
+      if (!target) return;
+      const idx = Number(target.dataset.idx);
+      const habit = state.dailyHabits[idx];
+      if (!habit) return;
+      const action = target.dataset.haction;
+
+      if (action === "toggle") {
+        toggleHabitAt(idx, target);
+      } else if (action === "up" && idx > 0) {
+        [state.dailyHabits[idx - 1], state.dailyHabits[idx]] = [state.dailyHabits[idx], state.dailyHabits[idx - 1]];
+        saveState();
+        renderDailyHabits();
+      } else if (action === "down" && idx < state.dailyHabits.length - 1) {
+        [state.dailyHabits[idx + 1], state.dailyHabits[idx]] = [state.dailyHabits[idx], state.dailyHabits[idx + 1]];
+        saveState();
+        renderDailyHabits();
+      } else if (action === "del") {
+        state.dailyHabits.splice(idx, 1);
+        saveState();
+        renderDailyHabits();
+      }
+    });
+
+    document.getElementById("habitList").addEventListener("keydown", e => {
+      if (e.key === " " || e.key === "Enter") {
+        const main = e.target.closest(".anchor-main[data-haction='toggle']");
+        if (!main) return;
+        e.preventDefault();
+        toggleHabitAt(Number(main.dataset.idx), main);
+      }
+    });
+
+    // ---------- 6. BODY & SENSORY CHECK (12 ITEMS) ----------
     const CARE_ITEMS = [
       "💧 Drank Water",
       "🍎 Ate Protein / Snack",
@@ -1471,7 +1951,7 @@
       }
     });
 
-    // ---------- 6. GENTLE UNSTICKING PROMPTS (15 PROMPTS) ----------
+    // ---------- 7. GENTLE UNSTICKING PROMPTS (15 PROMPTS) ----------
     const PROMPTS = [
       "What is the literal, ridiculously small first physical action for your main task? (e.g., 'Open the tab', not 'Do taxes')",
       "Where is perfectionism stalling you today? What does a 'B-minus, done-is-better-than-perfect' version look like?",
@@ -1508,7 +1988,7 @@
       saveState();
     });
 
-    // ---------- 7. LATER, NOT NEVER (PARKED & PERSISTENT) ----------
+    // ---------- 8. LATER, NOT NEVER (PARKED & PERSISTENT) ----------
     function renderParked() {
       const list = document.getElementById("parkedList");
       if (!state.parked.length) {
@@ -1557,11 +2037,11 @@
       renderAll();
     });
 
-    // ---------- 8. TODAY'S WINS (WITH UNDO BACK TO BRAIN DUMP) ----------
+    // ---------- 9. TODAY'S WINS (WITH UNDO BACK TO BRAIN DUMP / ANCHORS) ----------
     function renderWins() {
       const list = document.getElementById("winsList");
       if (!state.wins.length) {
-        list.innerHTML = `<li class="empty-note">Your completed tasks, self-care chips, and prize wheel wins will appear here!</li>`;
+        list.innerHTML = `<li class="empty-note">Your completed tasks, daily anchors, self-care chips, and prize wheel wins will appear here!</li>`;
         return;
       }
       list.innerHTML = state.wins.map((w, idx) => `
@@ -1569,7 +2049,7 @@
           <span class="win-text">✨ ${escapeHtml(w.text)}</span>
           <div class="win-meta">
             <span class="win-time">${escapeHtml(w.time)}</span>
-            <button type="button" class="btn-soft mini-btn" data-waction="undump" data-idx="${idx}" title="Move back to Brain Dump">↩️ Dump</button>
+            <button type="button" class="btn-soft mini-btn" data-waction="undump" data-idx="${idx}" title="Undo / move back to Brain Dump">↩️ Dump</button>
           </div>
         </li>
       `).join("");
@@ -1584,7 +2064,17 @@
 
       state.wins.splice(idx, 1);
 
-      if (winItem.text.startsWith("Self-Care: ")) {
+      if (winItem.text.startsWith("Daily Anchor: ")) {
+        const habitText = winItem.text.replace("Daily Anchor: ", "");
+        const matchingHabit = Array.isArray(state.dailyHabits)
+          ? state.dailyHabits.find(h => h.text === habitText)
+          : null;
+        if (matchingHabit) {
+          matchingHabit.done = false;
+        } else {
+          state.dump.unshift(habitText);
+        }
+      } else if (winItem.text.startsWith("Self-Care: ")) {
         const careLabel = winItem.text.replace("Self-Care: ", "");
         const careIdx = state.careDone.indexOf(careLabel);
         if (careIdx !== -1) state.careDone.splice(careIdx, 1);
@@ -1967,6 +2457,46 @@
       addWin(completed, "wheel", e.currentTarget);
     });
 
+    // ---------- BACKUP DRAWER CONTROLS ----------
+    document.getElementById("backupToggleBtn").addEventListener("click", () => {
+      const drawer = document.getElementById("backupDrawer");
+      const isOpen = drawer.classList.toggle("open");
+      document.getElementById("backupMsg").textContent = "";
+      if (isOpen) {
+        document.getElementById("backupCodeBox").value = JSON.stringify(state);
+      }
+    });
+
+    document.getElementById("closeBackupBtn").addEventListener("click", () => {
+      document.getElementById("backupDrawer").classList.remove("open");
+    });
+
+    document.getElementById("copyBackupBtn").addEventListener("click", async () => {
+      const box = document.getElementById("backupCodeBox");
+      box.value = JSON.stringify(state);
+      box.select();
+      try {
+        await navigator.clipboard.writeText(box.value);
+        document.getElementById("backupMsg").textContent = "✅ Save code copied!";
+      } catch (e) {
+        document.execCommand("copy");
+        document.getElementById("backupMsg").textContent = "✅ Selected & copied!";
+      }
+    });
+
+    document.getElementById("restoreBackupBtn").addEventListener("click", () => {
+      const raw = document.getElementById("backupCodeBox").value.trim();
+      const parsed = safeParseJSON(raw);
+      if (!parsed || typeof parsed !== "object") {
+        document.getElementById("backupMsg").textContent = "⚠️ Paste a valid save code first.";
+        return;
+      }
+      state = normalizeState(parsed);
+      saveState(true);
+      renderAll();
+      document.getElementById("backupMsg").textContent = "✅ Progress restored!";
+    });
+
     // ---------- HEADER CONTROLS ----------
     document.getElementById("fanfareSelect").addEventListener("change", e => {
       state.fanfare = e.target.value;
@@ -1987,9 +2517,13 @@
     });
 
     // Fresh Day Reset: clears daily tasks, 5-min wins, and Today's Wins,
-    // while keeping Parked Ideas, sound preferences, and wheel category intact!
+    // unchecks Daily Anchors while keeping the list & order intact,
+    // and preserves Parked Ideas, sound preferences, and wheel category!
     document.getElementById("freshDayBtn").addEventListener("click", () => {
       const keepParked = Array.isArray(state.parked) ? [...state.parked] : [];
+      const resetHabits = Array.isArray(state.dailyHabits)
+        ? state.dailyHabits.map(h => ({ ...h, done: false }))
+        : cloneDefaultHabits();
       const keepFanfare = state.fanfare || "derby";
       const keepMuted = Boolean(state.muted);
       const keepWheelCat = state.wheelCategory || "bedroom";
@@ -2001,6 +2535,7 @@
         northStar: "",
         northStarFirstStep: "",
         quickWins: [],
+        dailyHabits: resetHabits,
         careDone: [],
         promptIndex: keepPromptIdx,
         promptReply: "",
@@ -2008,7 +2543,8 @@
         wins: [],
         fanfare: keepFanfare,
         muted: keepMuted,
-        wheelCategory: keepWheelCat
+        wheelCategory: keepWheelCat,
+        updatedAt: Date.now()
       };
 
       clearInterval(timerInterval);
@@ -2024,7 +2560,7 @@
       completeBtn.disabled = true;
       completeBtn.textContent = "✅ Did It! (+ Win)";
 
-      saveState();
+      saveState(true);
       renderAll();
     });
 
@@ -2036,6 +2572,7 @@
       renderDump();
       renderNorthStar();
       renderQuickWins();
+      renderDailyHabits();
       renderCare();
       renderPrompt();
       renderParked();
@@ -2046,6 +2583,8 @@
     }
 
     renderAll();
+    hydrateAndSelfHeal();
   </script>
 </body>
 </html>
+```
