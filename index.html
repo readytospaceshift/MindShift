@@ -405,6 +405,36 @@
       word-break: break-word;
     }
 
+    .first-step-box {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px dashed rgba(168, 85, 247, 0.55);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin: 0 auto 12px;
+      text-align: left;
+    }
+
+    .first-step-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #6d28d9;
+      margin-bottom: 6px;
+    }
+
+    .first-step-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .first-step-row input {
+      flex: 1;
+      min-width: 170px;
+      padding: 6px 10px;
+      font-size: 0.86rem;
+    }
+
     .timer-bar {
       display: flex;
       flex-wrap: wrap;
@@ -816,6 +846,7 @@
         <div class="north-star-box">
           <div class="north-star-label">Current Single Focus</div>
           <div class="north-star-text" id="northStarText">No focus task chosen yet — pick one from your Brain Dump!</div>
+          <div id="northStarStarterWrap"></div>
           <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;" id="northStarActions"></div>
         </div>
         <div class="timer-bar">
@@ -849,7 +880,7 @@
       </section>
     </div>
 
-    <!-- 5. BODY & SENSORY CHECK -->
+    <!-- 5. BODY & SENSORY CHECK (12 ITEMS) -->
     <section class="card">
       <div class="card-header">
         <h2 class="card-title">🌿 5. Body &amp; Sensory Check (Basic Needs)</h2>
@@ -873,13 +904,13 @@
       <textarea class="prompt-reply" id="promptReply" placeholder="Jot a quick, zero-pressure answer here..."></textarea>
     </section>
 
-    <!-- 7. LATER, NOT NEVER (PARKED & PRIORITIZED) -->
+    <!-- 7. LATER, NOT NEVER (PARKED & PERSISTENT) -->
     <section class="card">
       <div class="card-header">
         <h2 class="card-title">🅿️ 7. Later, Not Never (Parked Ideas)</h2>
       </div>
       <div class="helper-guide">
-        <strong>What to do here:</strong> Safely park non-urgent ideas here so you don't lose them. Use <strong>↑ / ↓</strong> to rank what matters most next, or click <strong>🎯 Focus</strong> when ready.
+        <strong>What to do here:</strong> Safely park non-urgent ideas here—they stay saved forever even when you click <em>Fresh Day Reset</em>, until you manually focus, check off, or delete them!
       </div>
       <ul class="task-list" id="parkedList"></ul>
     </section>
@@ -943,6 +974,7 @@
       battery: "",
       dump: [],
       northStar: "",
+      northStarFirstStep: "",
       quickWins: [],
       careDone: [],
       promptIndex: 0,
@@ -1217,6 +1249,7 @@
       if (action === "focus") {
         if (state.northStar) state.dump.push(state.northStar);
         state.northStar = item;
+        state.northStarFirstStep = "";
         state.dump.splice(idx, 1);
       } else if (action === "quick") {
         state.quickWins.push(item);
@@ -1234,32 +1267,68 @@
       renderAll();
     });
 
-    // ---------- 3. RULE OF ONE + TIMER ----------
+    // ---------- 3. RULE OF ONE + TINY FIRST STEP + TIMER ----------
     function renderNorthStar() {
       const textEl = document.getElementById("northStarText");
+      const starterWrap = document.getElementById("northStarStarterWrap");
       const actionsEl = document.getElementById("northStarActions");
+
       if (!state.northStar) {
         textEl.textContent = "No focus task chosen yet — pick one from your Brain Dump!";
+        starterWrap.innerHTML = "";
         actionsEl.innerHTML = "";
         return;
       }
+
       textEl.textContent = state.northStar;
+      starterWrap.innerHTML = `
+        <div class="first-step-box">
+          <label for="firstStepInput" class="first-step-label">👣 Tiny First Step (What is the tiniest 60-second physical action to start?):</label>
+          <div class="first-step-row">
+            <input type="text" id="firstStepInput" value="${escapeHtml(state.northStarFirstStep || "")}" placeholder="e.g., Open the browser tab, put shoes on, grab a trash bag..." autocomplete="off" />
+            <button type="button" class="btn-soft mini-btn" id="completeFirstStepBtn">✨ Did First Step!</button>
+          </div>
+        </div>
+      `;
+
       actionsEl.innerHTML = `
         <button type="button" class="btn-mint" id="completeNorthStarBtn">🎉 Complete Focus Task!</button>
         <button type="button" class="btn-soft" id="parkNorthStarBtn">🅿️ Park for Later</button>
       `;
     }
 
+    document.getElementById("northStarStarterWrap").addEventListener("input", e => {
+      if (e.target.id === "firstStepInput") {
+        state.northStarFirstStep = e.target.value;
+        saveState();
+      }
+    });
+
+    document.getElementById("northStarStarterWrap").addEventListener("click", e => {
+      if (e.target.id === "completeFirstStepBtn") {
+        const step = (state.northStarFirstStep || "").trim();
+        const winLabel = step
+          ? `First Step: ${step}`
+          : `Started Focus Task: ${state.northStar}`;
+        state.northStarFirstStep = "";
+        saveState();
+        renderNorthStar();
+        addWin(winLabel, "care", e.target);
+      }
+    });
+
     document.getElementById("northStarActions").addEventListener("click", e => {
       if (e.target.id === "completeNorthStarBtn") {
         const finished = state.northStar;
         state.northStar = "";
+        state.northStarFirstStep = "";
         saveState();
         renderNorthStar();
         addWin(finished, "task", e.target);
       } else if (e.target.id === "parkNorthStarBtn") {
         state.parked.unshift(state.northStar);
         state.northStar = "";
+        state.northStarFirstStep = "";
         saveState();
         renderAll();
       }
@@ -1361,15 +1430,20 @@
       }
     });
 
-    // ---------- 5. BODY & SENSORY CHECK ----------
+    // ---------- 5. BODY & SENSORY CHECK (12 ITEMS) ----------
     const CARE_ITEMS = [
       "💧 Drank Water",
       "🍎 Ate Protein / Snack",
       "💊 Took Meds / Vitamins",
+      "🚽 Bathroom Break",
       "🧘 Stretched / Moved",
+      "☀️ Fresh Air / Sunlight",
       "🌬️ Deep Breaths",
       "👀 Rested Eyes",
-      "🎧 Adjusted Sound / Light"
+      "🎧 Adjusted Sound / Light",
+      "🧦 Comfy Clothes / Cozy Reset",
+      "🪥 Brushed Teeth / Washed Face",
+      "🌡️ Checked Temp / Added Layer"
     ];
 
     function renderCare() {
@@ -1434,7 +1508,7 @@
       saveState();
     });
 
-    // ---------- 7. LATER, NOT NEVER (PARKED & REORDERABLE) ----------
+    // ---------- 7. LATER, NOT NEVER (PARKED & PERSISTENT) ----------
     function renderParked() {
       const list = document.getElementById("parkedList");
       if (!state.parked.length) {
@@ -1471,6 +1545,7 @@
       } else if (action === "focus") {
         if (state.northStar) state.parked.push(state.northStar);
         state.northStar = item;
+        state.northStarFirstStep = "";
         state.parked.splice(idx, 1);
       } else if (action === "done") {
         state.parked.splice(idx, 1);
@@ -1507,10 +1582,8 @@
       const winItem = state.wins[idx];
       if (!winItem) return;
 
-      // Remove from Today's Wins
       state.wins.splice(idx, 1);
 
-      // If it came from a Self-Care chip, uncheck that chip; otherwise send clean text back to Brain Dump
       if (winItem.text.startsWith("Self-Care: ")) {
         const careLabel = winItem.text.replace("Self-Care: ", "");
         const careIdx = state.careDone.indexOf(careLabel);
@@ -1913,16 +1986,44 @@
       if (!state.muted) playSparkleChime();
     });
 
+    // Fresh Day Reset: clears daily tasks, 5-min wins, and Today's Wins,
+    // while keeping Parked Ideas, sound preferences, and wheel category intact!
     document.getElementById("freshDayBtn").addEventListener("click", () => {
-      const keepFanfare = state.fanfare;
-      const keepMuted = state.muted;
-      const keepWheelCat = state.wheelCategory;
+      const keepParked = Array.isArray(state.parked) ? [...state.parked] : [];
+      const keepFanfare = state.fanfare || "derby";
+      const keepMuted = Boolean(state.muted);
+      const keepWheelCat = state.wheelCategory || "bedroom";
+      const keepPromptIdx = state.promptIndex || 0;
+
       state = {
-        ...DEFAULT_STATE,
+        battery: "",
+        dump: [],
+        northStar: "",
+        northStarFirstStep: "",
+        quickWins: [],
+        careDone: [],
+        promptIndex: keepPromptIdx,
+        promptReply: "",
+        parked: keepParked,
+        wins: [],
         fanfare: keepFanfare,
         muted: keepMuted,
         wheelCategory: keepWheelCat
       };
+
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerDefaultSeconds = 120;
+      timerSeconds = 120;
+      document.getElementById("timerStartBtn").textContent = "▶ Start";
+
+      currentWheelTask = "";
+      document.getElementById("wheelResultBadge").textContent = "Ready to Spin";
+      document.getElementById("wheelResultText").textContent = "Tap SPIN! in the center of the wheel for a quick win!";
+      const completeBtn = document.getElementById("wheelCompleteBtn");
+      completeBtn.disabled = true;
+      completeBtn.textContent = "✅ Did It! (+ Win)";
+
       saveState();
       renderAll();
     });
